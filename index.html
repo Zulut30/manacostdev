@@ -593,6 +593,26 @@
       transform: translateY(-2px);
     }
 
+    .vac-general {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      margin-top: 48px;
+      padding: 32px 40px;
+      background: linear-gradient(130deg, #181208 0%, #100d06 100%);
+      border: 1px dashed rgba(201,151,58,0.3);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .vac-general-text {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
     /* ===== CONTACTS ===== */
     .contacts-grid {
       display: grid;
@@ -961,56 +981,89 @@
 
     <div class="vac-list">
 
+      <!-- Арена -->
       <div class="vac-card reveal">
-        <div class="vac-icon">⚙️</div>
+        <div class="vac-icon">🏟️</div>
         <div class="vac-body">
-          <div class="vac-title">Backend-разработчик</div>
+          <div class="vac-title">Автор по режиму Арена</div>
           <div class="vac-desc">
-            Серверная часть проектов, работа с базами данных карт, API-интеграции, оптимизация.
+            Нужен игрок со стабильным средним результатом 5–7 побед за забег. Умение обосновывать выбор карт во время драфта, глубокое понимание кривой маны и синергии, навык работы со статистическими ресурсами (HSReplay, Firestone). Готовность оперативно публиковать материалы сразу после выхода патчей.
           </div>
           <div class="vac-tags">
-            <span class="tag tag-b">Python / PHP</span>
-            <span class="tag tag-b">PostgreSQL</span>
+            <span class="tag tag-g">5–7 побед за забег</span>
+            <span class="tag tag-b">HSReplay / Firestone</span>
             <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Fulltime / Part</span>
+            <span class="tag tag-gr">Авторство</span>
           </div>
         </div>
-        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
+        <a href="https://forms.gle/mFjbNRs1BQCsXgmC8" target="_blank" class="vac-btn">Откликнуться</a>
       </div>
 
-      <div class="vac-card reveal" style="transition-delay:.08s">
-        <div class="vac-icon">🎨</div>
+      <!-- Поля сражений -->
+      <div class="vac-card reveal" style="transition-delay:.06s">
+        <div class="vac-icon">⚔️</div>
         <div class="vac-body">
-          <div class="vac-title">Frontend-разработчик</div>
+          <div class="vac-title">Автор по режиму Поля Сражений</div>
           <div class="vac-desc">
-            Интерфейсы в стиле Hearthstone, анимации карт, адаптивная вёрстка. Любовь к деталям обязательна.
+            Требуется стабильный MMR от 8 000+. Знание актуальных кривых прокачки таверны, всех архетипов (Звери, Мурлоки, Нежить, Демоны и др.) и ключевых карт для победы в лейтгейме. Умение объяснять позиционирование, составлять тир-листы героев, быстро реагировать на сезонные механики.
           </div>
           <div class="vac-tags">
-            <span class="tag tag-b">Vue / React</span>
-            <span class="tag tag-b">CSS / Animation</span>
+            <span class="tag tag-g">MMR 8 000+</span>
+            <span class="tag tag-b">HSReplay Tier7</span>
             <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Part-time</span>
+            <span class="tag tag-gr">Авторство</span>
           </div>
         </div>
-        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
+        <a href="https://forms.gle/Gekqqz3NqWudk9eR8" target="_blank" class="vac-btn">Откликнуться</a>
       </div>
 
-      <div class="vac-card reveal" style="transition-delay:.16s">
-        <div class="vac-icon">✍️</div>
+      <!-- Стандарт -->
+      <div class="vac-card reveal" style="transition-delay:.12s">
+        <div class="vac-icon">🏆</div>
         <div class="vac-body">
-          <div class="vac-title">Редактор контента / HS-эксперт</div>
+          <div class="vac-title">Автор по Стандартному режиму</div>
           <div class="vac-desc">
-            Актуализация баз данных, написание гайдов. Главное — глубокое знание Hearthstone.
+            Ежемесячное взятие ранга Легенды, в идеале — топ-500/1000. Глубокое понимание win conditions всех актуальных колод, анализ матч-апов, написание детальных гайдов с правилами муллигана и подбором бюджетных замен. Опыт в турнирах — плюс.
           </div>
           <div class="vac-tags">
-            <span class="tag tag-g">Hearthstone-знаток</span>
-            <span class="tag tag-b">Русский язык</span>
+            <span class="tag tag-g">Легенда ежемесячно</span>
+            <span class="tag tag-b">Гайды / Аналитика</span>
             <span class="tag tag-g">Удалённо</span>
+            <span class="tag tag-gr">Авторство</span>
           </div>
         </div>
-        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
+        <a href="https://forms.gle/VcQRajTUrSdYAycWA" target="_blank" class="vac-btn">Откликнуться</a>
       </div>
 
+      <!-- Вольный -->
+      <div class="vac-card reveal" style="transition-delay:.18s">
+        <div class="vac-icon">📜</div>
+        <div class="vac-body">
+          <div class="vac-title">Автор по Вольному режиму</div>
+          <div class="vac-desc">
+            Ранг Легенды обязателен. Ценится статус «ветерана» с обширной коллекцией карт всех дополнений. Знание OTK-комбинаций, нишевых механик, умение предсказывать влияние новых релизов на баланс Вольного. Приветствуется знакомство с китайскими мета-отчётами.
+          </div>
+          <div class="vac-tags">
+            <span class="tag tag-g">Легенда / Ветеран</span>
+            <span class="tag tag-b">OTK / Механики</span>
+            <span class="tag tag-g">Удалённо</span>
+            <span class="tag tag-gr">Авторство</span>
+          </div>
+        </div>
+        <a href="https://forms.gle/S4zbcxu5eZTSEFjR8" target="_blank" class="vac-btn">Откликнуться</a>
+      </div>
+
+    </div>
+
+    <!-- Общая форма -->
+    <div class="vac-general reveal">
+      <div class="vac-general-text">
+        Не нашли подходящей позиции? Мы рады единомышленникам, готовым работать на благо нашего сообщества!
+      </div>
+      <a href="https://forms.gle/Aet8Yhn1ucn5x5RB7" target="_blank" class="btn-partner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        Подать общую заявку
+      </a>
     </div>
   </section>
 
