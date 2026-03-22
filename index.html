@@ -753,59 +753,97 @@
     /* ===== CONTACTS ===== */
     .contacts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
     .ct-card {
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      padding: 28px 20px 24px;
-      background: linear-gradient(155deg, #1c1409 0%, #110d06 100%);
-      border: 1px solid rgba(201,151,58,0.18);
-      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #181208 0%, #0f0c06 100%);
+      border: 1px solid rgba(201,151,58,0.15);
+      border-radius: 10px;
       text-decoration: none;
-      transition: all 0.32s;
+      transition: all 0.28s;
       position: relative; overflow: hidden;
     }
 
     .ct-card::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,151,58,0.4), transparent);
-      opacity: 0; transition: opacity 0.3s;
+      position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light));
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.3s ease;
     }
 
     .ct-card:hover {
-      border-color: rgba(201,151,58,0.42);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.55), 0 0 28px rgba(201,151,58,0.1);
-      transform: translateY(-7px);
+      border-color: rgba(201,151,58,0.38);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.5), 0 0 18px rgba(201,151,58,0.08);
+      transform: translateX(4px);
     }
 
-    .ct-card:hover::before { opacity: 1; }
+    .ct-card:hover::before { transform: scaleY(1); }
+
+    .ct-icon-wrap {
+      width: 46px; height: 46px;
+      border-radius: 10px;
+      background: rgba(201,151,58,0.08);
+      border: 1px solid rgba(201,151,58,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.28s, border-color 0.28s;
+    }
+
+    .ct-card:hover .ct-icon-wrap {
+      background: rgba(201,151,58,0.14);
+      border-color: rgba(201,151,58,0.35);
+    }
 
     .ct-img {
-      width: 52px; height: 52px;
+      width: 26px; height: 26px;
       object-fit: contain;
-      margin-bottom: 14px;
-      filter: drop-shadow(0 0 10px rgba(201,151,58,0.3));
+      filter: drop-shadow(0 0 6px rgba(201,151,58,0.3));
       transition: filter 0.3s, transform 0.3s;
     }
 
     .ct-card:hover .ct-img {
-      filter: drop-shadow(0 0 18px rgba(201,151,58,0.6));
-      transform: scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(201,151,58,0.6));
+      transform: scale(1.1);
     }
 
+    .ct-info { flex: 1; min-width: 0; }
+
     .ct-label {
-      font-family: 'HSFont', serif; font-size: 0.62rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text-dim); margin-bottom: 5px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(201,151,58,0.5);
+      margin-bottom: 3px;
     }
 
     .ct-value {
-      font-family: 'HSFont', serif; font-size: 0.9rem;
-      color: var(--gold-light); letter-spacing: 0.02em;
+      font-family: 'HSFont', serif;
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ct-arrow {
+      color: rgba(201,151,58,0.3);
+      font-size: 0.75rem;
+      transition: color 0.28s, transform 0.28s;
+      flex-shrink: 0;
+    }
+
+    .ct-card:hover .ct-arrow {
+      color: var(--gold);
+      transform: translateX(3px);
     }
 
     /* ===== FOOTER ===== */
@@ -921,20 +959,154 @@
 
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { gap: 18px; }
-      .nav-links a { font-size: 0.72rem; }
-      .vac-card { flex-direction: column; align-items: flex-start; }
-      .vac-btn { align-self: flex-start; }
+    /* ===== HAMBURGER ===== */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+      z-index: 300;
     }
 
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== RESPONSIVE ===== */
+
+    /* Tablet & smaller desktop */
+    @media (max-width: 1024px) {
+      section { padding: 64px 28px; }
+      .projects-grid { gap: 20px; }
+      .vac-grid { gap: 18px; }
+      .contacts-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+
+    /* Tablet */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 60px; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        background: rgba(7,4,2,0.98);
+        border-bottom: 1px solid rgba(201,151,58,0.2);
+        padding: 12px 0 20px;
+        backdrop-filter: blur(16px);
+        z-index: 199;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a {
+        display: block;
+        padding: 14px 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(201,151,58,0.07);
+      }
+      .nav-links a::after { display: none; }
+      .nav-burger { display: flex; }
+
+      .hero { padding: 80px 20px 60px; min-height: auto; padding-top: 90px; }
+      .hero-logo img { width: 160px; }
+      .hero-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .hero-sub { font-size: 0.75rem; }
+      .hero-pills { flex-direction: column; align-items: center; gap: 10px; }
+      .pill { width: 100%; max-width: 280px; justify-content: center; }
+
+      section { padding: 56px 20px; }
+
+      .sec-title { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+
+      /* Projects */
+      .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* Partners */
+      .partners-grid { gap: 24px 32px; }
+      .partner-item { width: 150px; height: 72px; padding: 14px 20px; }
+
+      /* Vacancies */
+      .vac-grid { grid-template-columns: 1fr; }
+
+      /* Contacts */
+      .contacts-grid { grid-template-columns: 1fr; gap: 10px; }
+      .ct-value { font-size: 0.82rem; }
+
+      /* Stats */
+      .stats-inner { padding: 28px 24px; }
+
+      /* Partners CTA */
+      .partners-cta { margin-top: 36px; }
+
+      /* Ornament */
+      .ornament { margin: 32px 0; }
+    }
+
+    /* Mobile */
     @media (max-width: 500px) {
-      .nav-links { display: none; }
-      .hero-logo img { width: 170px; }
+      nav { padding: 0 16px; }
+
+      .hero { padding-top: 80px; }
+      .hero-logo img { width: 130px; }
+      .hero-title { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+      .hero-sub { font-size: 0.7rem; letter-spacing: 0.08em; }
+      .scroll-hint { display: none; }
+
+      section { padding: 44px 16px; }
+
+      /* Stats */
+      .stats-inner { flex-direction: column; gap: 24px; padding: 24px 20px; }
+      .stat-divider { width: 80px; height: 1px; margin: 0; }
+      .stat-num { font-size: clamp(2rem, 10vw, 3rem); }
+      .stat-label { font-size: 0.68rem; }
+
+      /* Projects cards */
+      .proj-img { height: 160px; }
+      .proj-body { padding: 18px 16px; }
+
+      /* Vacancies */
+      .vac-head { padding: 16px 16px 14px; gap: 12px; }
+      .vac-mode-icon { width: 44px; height: 44px; }
+      .vac-title { font-size: 1rem; }
+      .vac-body { padding: 14px 16px; }
+      .vac-foot { padding: 12px 16px 16px; }
+      .vac-btn { padding: 9px 18px; font-size: 0.68rem; }
+
+      /* Contacts */
+      .contacts-grid { gap: 8px; }
+      .ct-card { padding: 14px 16px; gap: 12px; }
+      .ct-icon-wrap { width: 40px; height: 40px; border-radius: 8px; }
+      .ct-img { width: 22px; height: 22px; }
+
+      /* Partners */
+      .partner-item { width: 130px; height: 64px; padding: 12px 16px; }
+      .partner-item img { max-height: 40px; }
+      .partners-grid { gap: 16px 20px; }
+
+      /* Footer */
+      footer { padding: 24px 16px; }
+      .footer-copy { font-size: 0.6rem; }
     }
   </style>
+  <!-- Performance: preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preload critical font -->
+  <link rel="preload" href="font/2318-font.otf" as="font" type="font/otf" crossorigin>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -950,12 +1122,15 @@
     <a href="#" class="nav-logo">
       <span style="font-family:'HSFont',serif;font-size:1.1rem;letter-spacing:0.08em;background:linear-gradient(180deg,#f0c060,#c9973a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Manacost Dev</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#projects">Проекты</a></li>
-      <li><a href="#partners">Партнёры</a></li>
-      <li><a href="#vacancies">Вакансии</a></li>
-      <li><a href="#contacts">Контакты</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#projects" onclick="closeNav()">Проекты</a></li>
+      <li><a href="#partners" onclick="closeNav()">Партнёры</a></li>
+      <li><a href="#vacancies" onclick="closeNav()">Вакансии</a></li>
+      <li><a href="#contacts" onclick="closeNav()">Контакты</a></li>
     </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Меню" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ===== HERO ===== -->
@@ -1024,7 +1199,7 @@
 
       <div class="proj-card reveal">
         <div class="card-top">
-          <img class="card-bg" src="back/hs-manacost.png" alt="">
+          <img class="card-bg" src="back/hs-manacost.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
           <div class="card-klass">СМИ · Гайды · Колоды</div>
@@ -1039,7 +1214,7 @@
 
       <div class="proj-card reveal" style="transition-delay:.1s">
         <div class="card-top">
-          <img class="card-bg" src="back/kolodahearthstone.png" alt="">
+          <img class="card-bg" src="back/kolodahearthstone.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
           <div class="card-klass">Подписка · Авторские гайды · Мета</div>
@@ -1054,7 +1229,7 @@
 
       <div class="proj-card reveal" style="transition-delay:.2s">
         <div class="card-top">
-          <img class="card-bg" src="back/hs-arena.png" alt="">
+          <img class="card-bg" src="back/hs-arena.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
           <div class="card-klass">Арена · Статистика</div>
@@ -1069,7 +1244,7 @@
 
       <div class="proj-card reveal" style="transition-delay:.3s">
         <div class="card-top">
-          <img class="card-bg" src="back/Конструктор колод.jpg" alt="">
+          <img class="card-bg" src="back/Конструктор колод.jpg" alt="" loading="lazy">
         </div>
         <div class="card-body">
           <div class="card-klass">Telegram Bot · Конструктор</div>
@@ -1099,13 +1274,13 @@
       <div class="sec-rule"></div>
     </div>
     <div class="partners-grid reveal">
-      <div class="partner-item"><img src="sponsor/blizzard.png" alt="Blizzard"></div>
-      <div class="partner-item"><img src="sponsor/cybersport.ru logo.png" alt="Cybersport.ru"></div>
-      <div class="partner-item"><img src="sponsor/honor.png" alt="Honor"></div>
-      <div class="partner-item"><img src="sponsor/mail.ru.webp" alt="Mail.ru"></div>
-      <div class="partner-item"><img src="sponsor/playerok.png" alt="Playerok"></div>
-      <div class="partner-item"><img src="sponsor/samsung.png" alt="Samsung"></div>
-      <div class="partner-item"><img src="sponsor/msk-esports.svg" alt="Московский Киберспорт" width="160" height="55"></div>
+      <div class="partner-item"><img src="sponsor/blizzard.png" alt="Blizzard" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/cybersport.ru logo.png" alt="Cybersport.ru" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/honor.png" alt="Honor" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/mail.ru.webp" alt="Mail.ru" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/playerok.png" alt="Playerok" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/samsung.png" alt="Samsung" loading="lazy"></div>
+      <div class="partner-item"><img src="sponsor/msk-esports.svg" alt="Московский Киберспорт" width="160" height="55" loading="lazy"></div>
     </div>
     <div class="partners-cta reveal">
       <p class="partners-cta-text">Хотите сотрудничать с нами?</p>
@@ -1315,39 +1490,69 @@
     <div class="contacts-grid">
 
       <a href="mailto:admin@hs-manacost.ru" class="ct-card reveal">
-        <img class="ct-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9973a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E" alt="Email">
-        <div class="ct-label">Email</div>
-        <div class="ct-value">admin@hs-manacost.ru</div>
+        <div class="ct-icon-wrap">
+          <svg class="ct-img" viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">Email</div>
+          <div class="ct-value">admin@hs-manacost.ru</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
-      <a href="https://t.me/manacost_ru" target="_blank" class="ct-card reveal" style="transition-delay:.08s">
-        <img class="ct-img" src="telegram.png" alt="Telegram">
-        <div class="ct-label">Telegram</div>
-        <div class="ct-value">@manacost_ru</div>
+      <a href="https://t.me/manacost_ru" target="_blank" class="ct-card reveal" style="transition-delay:.05s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="telegram.png" alt="Telegram" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">Telegram-канал</div>
+          <div class="ct-value">@manacost_ru</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
-      <a href="https://vk.com/manacost" target="_blank" class="ct-card reveal" style="transition-delay:.16s">
-        <img class="ct-img" src="vk.svg" alt="ВКонтакте">
-        <div class="ct-label">ВКонтакте</div>
-        <div class="ct-value">vk.com/manacost</div>
+      <a href="https://vk.com/manacost" target="_blank" class="ct-card reveal" style="transition-delay:.10s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="vk.svg" alt="ВКонтакте" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">ВКонтакте</div>
+          <div class="ct-value">vk.com/manacost</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
-      <a href="https://boosty.to/kolodahearthstone" target="_blank" class="ct-card reveal" style="transition-delay:.24s">
-        <img class="ct-img" src="boosty.png" alt="Boosty">
-        <div class="ct-label">Boosty</div>
-        <div class="ct-value">boosty.to/kolodahearthstone</div>
+      <a href="https://boosty.to/kolodahearthstone" target="_blank" class="ct-card reveal" style="transition-delay:.15s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="boosty.png" alt="Boosty" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">Boosty</div>
+          <div class="ct-value">kolodahearthstone</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
-      <a href="https://t.me/manacostHS" target="_blank" class="ct-card reveal" style="transition-delay:.32s">
-        <img class="ct-img" src="telegram.png" alt="Техподдержка">
-        <div class="ct-label">Техподдержка</div>
-        <div class="ct-value">@manacostHS</div>
+      <a href="https://t.me/manacostHS" target="_blank" class="ct-card reveal" style="transition-delay:.20s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="telegram.png" alt="Техподдержка" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">Техподдержка</div>
+          <div class="ct-value">@manacostHS</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
-      <a href="https://t.me/LordZulut" target="_blank" class="ct-card reveal" style="transition-delay:.4s">
-        <img class="ct-img" src="telegram.png" alt="Реклама">
-        <div class="ct-label">Реклама</div>
-        <div class="ct-value">@LordZulut</div>
+      <a href="https://t.me/LordZulut" target="_blank" class="ct-card reveal" style="transition-delay:.25s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="telegram.png" alt="Реклама" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label">Реклама</div>
+          <div class="ct-value">@LordZulut</div>
+        </div>
+        <span class="ct-arrow">›</span>
       </a>
 
     </div>
@@ -1458,6 +1663,18 @@ document.querySelectorAll('.proj-card').forEach(card=>{
   });
   card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
 });
+
+// Burger menu
+function toggleNav() {
+  const burger = document.getElementById('navBurger');
+  const links  = document.getElementById('navLinks');
+  burger.classList.toggle('open');
+  links.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navBurger').classList.remove('open');
+  document.getElementById('navLinks').classList.remove('open');
+}
 
 // Vacancies accordion
 function toggleReqs(btn) {
