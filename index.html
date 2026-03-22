@@ -1288,6 +1288,45 @@
       footer { padding: 24px 16px; }
       .footer-copy { font-size: 0.6rem; }
     }
+
+    /* ===== LANG SWITCHER ===== */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 12px;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 22px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+      transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+      opacity: 0.45;
+    }
+
+    .lang-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lang-btn:hover { opacity: 0.85; transform: scale(1.1); }
+    .lang-btn.active { border-color: var(--gold); opacity: 1; }
+
+    @media (max-width: 500px) {
+      .lang-switcher { margin-right: 6px; }
+      .lang-btn { width: 26px; height: 18px; }
+    }
   </style>
   <!-- Performance: preconnect Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1310,12 +1349,23 @@
       <span style="font-family:'HSFont',serif;font-size:1.1rem;letter-spacing:0.08em;background:linear-gradient(180deg,#f0c060,#c9973a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Manacost Dev</span>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#projects" onclick="closeNav()">Проекты</a></li>
-      <li><a href="#partners" onclick="closeNav()">Партнёры</a></li>
-      <li><a href="#vacancies" onclick="closeNav()">Вакансии</a></li>
-      <li><a href="#services" onclick="closeNav()">Услуги</a></li>
-      <li><a href="#contacts" onclick="closeNav()">Контакты</a></li>
+      <li><a href="#projects" onclick="closeNav()" data-i18n="nav.projects">Проекты</a></li>
+      <li><a href="#partners" onclick="closeNav()" data-i18n="nav.partners">Партнёры</a></li>
+      <li><a href="#vacancies" onclick="closeNav()" data-i18n="nav.vacancies">Вакансии</a></li>
+      <li><a href="#services" onclick="closeNav()" data-i18n="nav.services">Услуги</a></li>
+      <li><a href="#contacts" onclick="closeNav()" data-i18n="nav.contacts">Контакты</a></li>
     </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="ru" onclick="setLang('ru')" title="Русский">
+        <img src="russia.png" alt="RU">
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="usa.png" alt="EN">
+      </button>
+      <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" title="Polski">
+        <img src="Poland.png" alt="PL">
+      </button>
+    </div>
     <button class="nav-burger" id="navBurger" aria-label="Меню" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
@@ -1329,23 +1379,23 @@
     </div>
 
     <div class="hero-title">Manacost Dev</div>
-    <div class="hero-sub">Команда разработчиков · Hearthstone community</div>
+    <div class="hero-sub" data-i18n="hero.sub">Команда разработчиков · Hearthstone community</div>
 
     <div class="hero-line"></div>
 
-    <p class="hero-desc">
+    <p class="hero-desc" data-i18n="hero.desc">
       Мы команда энтузиастов, которая стремится развивать
       русскоязычное сообщество по Hearthstone.
     </p>
 
     <div class="hero-pills">
-      <div class="pill"><span class="pill-dot"></span>Активная разработка</div>
-      <div class="pill"><span class="pill-dot"></span>4 живых проекта</div>
-      <div class="pill"><span class="pill-dot"></span>Открытые вакансии</div>
+      <div class="pill"><span class="pill-dot"></span><span data-i18n="hero.pill1">Активная разработка</span></div>
+      <div class="pill"><span class="pill-dot"></span><span data-i18n="hero.pill2">4 живых проекта</span></div>
+      <div class="pill"><span class="pill-dot"></span><span data-i18n="hero.pill3">Открытые вакансии</span></div>
     </div>
 
     <div class="scroll-cue">
-      <span>Листай вниз</span>
+      <span data-i18n="hero.scroll">Листай вниз</span>
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"/>
       </svg>
@@ -1358,19 +1408,19 @@
       <div class="stat-item">
         <img class="stat-icon" src="assets/images/social/vk.svg" alt="ВКонтакте">
         <div class="stat-num" data-target="108000">0</div>
-        <div class="stat-label">подписчиков ВКонтакте</div>
+        <div class="stat-label" data-i18n="stats.vk">подписчиков ВКонтакте</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
         <img class="stat-icon" src="assets/images/social/telegram.png" alt="Telegram">
         <div class="stat-num" data-target="7500">0</div>
-        <div class="stat-label">подписчиков в Telegram</div>
+        <div class="stat-label" data-i18n="stats.tg">подписчиков в Telegram</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
         <div class="stat-icon" style="font-size:2rem;filter:drop-shadow(0 0 10px rgba(201,151,58,0.5))">🌐</div>
         <div class="stat-num stat-num--plus" data-target="500000">0</div>
-        <div class="stat-label">посещений сайтов в месяц</div>
+        <div class="stat-label" data-i18n="stats.visits">посещений сайтов в месяц</div>
       </div>
     </div>
   </div>
@@ -1378,8 +1428,8 @@
   <!-- ===== PROJECTS ===== -->
   <section id="projects">
     <div class="sec-head reveal">
-      <div class="sec-eyebrow">Наши проекты</div>
-      <div class="sec-title">Проекты разработанные нашей командой</div>
+      <div class="sec-eyebrow" data-i18n="projects.eyebrow">Наши проекты</div>
+      <div class="sec-title" data-i18n="projects.title">Проекты разработанные нашей командой</div>
       <div class="sec-rule"></div>
     </div>
 
@@ -1390,13 +1440,13 @@
           <img class="card-bg" src="assets/images/projects/hs-manacost.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-klass">СМИ · Гайды · Колоды</div>
+          <div class="card-klass" data-i18n="proj1.klass">СМИ · Гайды · Колоды</div>
           <div class="card-name">hs-manacost.ru</div>
-          <p class="card-text">
+          <p class="card-text" data-i18n="proj1.text">
             Самое крупное СМИ по Hearthstone на русском языке.
             Подборки колод, регулярные гайды и справочники для игроков любого уровня.
           </p>
-          <a href="https://hs-manacost.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt="">Открыть сайт</a>
+          <a href="https://hs-manacost.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt=""><span data-i18n="btn.openSite">Открыть сайт</span></a>
         </div>
       </div>
 
@@ -1405,13 +1455,13 @@
           <img class="card-bg" src="assets/images/projects/kolodahearthstone.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-klass">Подписка · Авторские гайды · Мета</div>
+          <div class="card-klass" data-i18n="proj2.klass">Подписка · Авторские гайды · Мета</div>
           <div class="card-name">kolodahearthstone.ru</div>
-          <p class="card-text">
+          <p class="card-text" data-i18n="proj2.text">
             Закрытый клуб по подписке с уникальными авторскими гайдами
             и глубокими разборами актуальной меты от экспертов.
           </p>
-          <a href="https://kolodahearthstone.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt="">Открыть сайт</a>
+          <a href="https://kolodahearthstone.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt=""><span data-i18n="btn.openSite">Открыть сайт</span></a>
         </div>
       </div>
 
@@ -1420,13 +1470,13 @@
           <img class="card-bg" src="assets/images/projects/hs-arena.png" alt="" loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-klass">Арена · Статистика</div>
+          <div class="card-klass" data-i18n="proj3.klass">Арена · Статистика</div>
           <div class="card-name">hs-arena.ru</div>
-          <p class="card-text">
+          <p class="card-text" data-i18n="proj3.text">
             Лучший сайт со статистикой по режиму Арены.
             Актуальные данные, рейтинги карт и всё необходимое для победных ранов.
           </p>
-          <a href="https://hs-arena.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt="">Открыть сайт</a>
+          <a href="https://hs-arena.ru" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt=""><span data-i18n="btn.openSite">Открыть сайт</span></a>
         </div>
       </div>
 
@@ -1435,13 +1485,13 @@
           <img class="card-bg" src="assets/images/projects/koloda-bot.jpg" alt="" loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-klass">Telegram Bot · Конструктор</div>
+          <div class="card-klass" data-i18n="proj4.klass">Telegram Bot · Конструктор</div>
           <div class="card-name">@manacostcard_bot</div>
-          <p class="card-text">
+          <p class="card-text" data-i18n="proj4.text">
             Телеграм-бот, который генерирует красивую картинку колоды по её коду.
             Поделись своей сборкой одним скриншотом!
           </p>
-          <a href="https://t.me/manacostcard_bot" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt="">Открыть бота</a>
+          <a href="https://t.me/manacostcard_bot" target="_blank" class="card-url"><img class="card-url-icon" src="assets/images/icons/read.png" alt=""><span data-i18n="btn.openBot">Открыть бота</span></a>
         </div>
       </div>
 
@@ -1457,8 +1507,8 @@
   <!-- ===== PARTNERS ===== -->
   <section id="partners">
     <div class="sec-head reveal">
-      <div class="sec-eyebrow">Сотрудничество</div>
-      <div class="sec-title">Мы работали с</div>
+      <div class="sec-eyebrow" data-i18n="partners.eyebrow">Сотрудничество</div>
+      <div class="sec-title" data-i18n="partners.title">Мы работали с</div>
       <div class="sec-rule"></div>
     </div>
     <div class="partners-grid reveal">
@@ -1471,10 +1521,10 @@
       <div class="partner-item"><img src="assets/images/partners/msk-esports.svg" alt="Московский Киберспорт" width="160" height="55" loading="lazy"></div>
     </div>
     <div class="partners-cta reveal">
-      <p class="partners-cta-text">Хотите сотрудничать с нами?</p>
+      <p class="partners-cta-text" data-i18n="partners.cta">Хотите сотрудничать с нами?</p>
       <a href="https://t.me/LordZulut" target="_blank" class="btn-partner">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
-        Написать по рекламе
+        <span data-i18n="btn.adContact">Написать по рекламе</span>
       </a>
     </div>
   </section>
@@ -1488,8 +1538,8 @@
   <!-- ===== VACANCIES ===== -->
   <section id="vacancies">
     <div class="sec-head reveal">
-      <div class="sec-eyebrow">Присоединяйся к команде</div>
-      <div class="sec-title">Вакансии</div>
+      <div class="sec-eyebrow" data-i18n="vac.eyebrow">Присоединяйся к команде</div>
+      <div class="sec-title" data-i18n="vac.title">Вакансии</div>
       <div class="sec-rule"></div>
     </div>
 
@@ -1500,23 +1550,23 @@
         <div class="vac-head">
           <img class="vac-mode-icon" src="assets/images/vacancies/arena.webp" alt="Арена">
           <div class="vac-head-info">
-            <div class="vac-eyebrow">Автор · Контент</div>
-            <div class="vac-title">Режим Арена</div>
+            <div class="vac-eyebrow" data-i18n="vac.authorContent">Автор · Контент</div>
+            <div class="vac-title" data-i18n="vac.arena.title">Режим Арена</div>
           </div>
         </div>
         <div class="vac-body">
-          <div class="vac-desc">Ищем опытного игрока в Арену, способного стабильно брать 5–7 побед за забег и писать качественные гайды с аргументацией каждого выбора карты.</div>
+          <div class="vac-desc" data-i18n="vac.arena.desc">Ищем опытного игрока в Арену, способного стабильно брать 5–7 побед за забег и писать качественные гайды с аргументацией каждого выбора карты.</div>
           <div class="vac-tags">
-            <span class="tag tag-g">5–7 побед за забег</span>
+            <span class="tag tag-g" data-i18n="vac.arena.tag1">5–7 побед за забег</span>
             <span class="tag tag-b">HSReplay / Firestone</span>
-            <span class="tag tag-b">Кривая маны</span>
+            <span class="tag tag-b" data-i18n="vac.arena.tag3">Кривая маны</span>
           </div>
           <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
-            <span>Требования</span>
+            <span data-i18n="vac.requirements">Требования</span>
             <span class="vac-toggle-arrow">▼</span>
           </button>
           <div class="vac-reqs">
-            <ul>
+            <ul data-i18n-html="vac.arena.reqs">
               <li>Стабильный средний результат 5–7 побед за забег</li>
               <li>Регулярная игра в актуальных патчах и знание обновлений формата</li>
               <li>Глубокое понимание кривой маны и синергии при драфте</li>
@@ -1528,8 +1578,8 @@
           </div>
         </div>
         <div class="vac-foot">
-          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
-          <a href="https://forms.gle/mFjbNRs1BQCsXgmC8" target="_blank" class="vac-btn">Откликнуться</a>
+          <div class="vac-remote"><span class="vac-remote-dot"></span><span data-i18n="vac.remote">Удалённо · Авторство</span></div>
+          <a href="https://forms.gle/mFjbNRs1BQCsXgmC8" target="_blank" class="vac-btn" data-i18n="btn.apply">Откликнуться</a>
         </div>
       </div>
 
@@ -1538,23 +1588,23 @@
         <div class="vac-head">
           <img class="vac-mode-icon" src="assets/images/vacancies/battleground.webp" alt="Поля Сражений">
           <div class="vac-head-info">
-            <div class="vac-eyebrow">Автор · Контент</div>
-            <div class="vac-title">Поля Сражений</div>
+            <div class="vac-eyebrow" data-i18n="vac.authorContent">Автор · Контент</div>
+            <div class="vac-title" data-i18n="vac.bg.title">Поля Сражений</div>
           </div>
         </div>
         <div class="vac-body">
-          <div class="vac-desc">Нужен игрок с высоким MMR, который умеет объяснять позиционирование, составлять тир-листы героев и быстро адаптироваться к сезонным механикам.</div>
+          <div class="vac-desc" data-i18n="vac.bg.desc">Нужен игрок с высоким MMR, который умеет объяснять позиционирование, составлять тир-листы героев и быстро адаптироваться к сезонным механикам.</div>
           <div class="vac-tags">
             <span class="tag tag-g">MMR 8 000+</span>
             <span class="tag tag-b">HSReplay Tier7</span>
-            <span class="tag tag-b">Архетипы</span>
+            <span class="tag tag-b" data-i18n="vac.bg.tag3">Архетипы</span>
           </div>
           <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
-            <span>Требования</span>
+            <span data-i18n="vac.requirements">Требования</span>
             <span class="vac-toggle-arrow">▼</span>
           </button>
           <div class="vac-reqs">
-            <ul>
+            <ul data-i18n-html="vac.bg.reqs">
               <li>Стабильный MMR от 8 000+ (подтверждает игру в сильных лобби)</li>
               <li>Активная игра каждый сезон с учётом сброса рейтинга</li>
               <li>Знание кривых прокачки таверны (стандартная, Рафаам, агрессивная и др.)</li>
@@ -1568,8 +1618,8 @@
           </div>
         </div>
         <div class="vac-foot">
-          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
-          <a href="https://forms.gle/Gekqqz3NqWudk9eR8" target="_blank" class="vac-btn">Откликнуться</a>
+          <div class="vac-remote"><span class="vac-remote-dot"></span><span data-i18n="vac.remote">Удалённо · Авторство</span></div>
+          <a href="https://forms.gle/Gekqqz3NqWudk9eR8" target="_blank" class="vac-btn" data-i18n="btn.apply">Откликнуться</a>
         </div>
       </div>
 
@@ -1578,23 +1628,23 @@
         <div class="vac-head">
           <img class="vac-mode-icon" src="assets/images/vacancies/standart.webp" alt="Стандарт">
           <div class="vac-head-info">
-            <div class="vac-eyebrow">Автор · Контент</div>
-            <div class="vac-title">Стандартный режим</div>
+            <div class="vac-eyebrow" data-i18n="vac.authorContent">Автор · Контент</div>
+            <div class="vac-title" data-i18n="vac.std.title">Стандартный режим</div>
           </div>
         </div>
         <div class="vac-body">
-          <div class="vac-desc">Ищем Легенд-игрока, способного писать детальные гайды на колоды: муллиган, стратегии по стадиям игры и анализ матч-апов для всей аудитории — от новичка до профи.</div>
+          <div class="vac-desc" data-i18n="vac.std.desc">Ищем Легенд-игрока, способного писать детальные гайды на колоды: муллиган, стратегии по стадиям игры и анализ матч-апов для всей аудитории — от новичка до профи.</div>
           <div class="vac-tags">
-            <span class="tag tag-g">Легенда ежемесячно</span>
+            <span class="tag tag-g" data-i18n="vac.std.tag1">Легенда ежемесячно</span>
             <span class="tag tag-b">Win conditions</span>
-            <span class="tag tag-b">Матч-апы</span>
+            <span class="tag tag-b" data-i18n="vac.std.tag3">Матч-апы</span>
           </div>
           <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
-            <span>Требования</span>
+            <span data-i18n="vac.requirements">Требования</span>
             <span class="vac-toggle-arrow">▼</span>
           </button>
           <div class="vac-reqs">
-            <ul>
+            <ul data-i18n-html="vac.std.reqs">
               <li>Ежемесячное взятие ранга Легенды; идеально — топ-500/1000</li>
               <li>Глубокое понимание win conditions всех актуальных колод</li>
               <li>Анализ матч-апов и умение определять правильные tech cards</li>
@@ -1605,8 +1655,8 @@
           </div>
         </div>
         <div class="vac-foot">
-          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
-          <a href="https://forms.gle/VcQRajTUrSdYAycWA" target="_blank" class="vac-btn">Откликнуться</a>
+          <div class="vac-remote"><span class="vac-remote-dot"></span><span data-i18n="vac.remote">Удалённо · Авторство</span></div>
+          <a href="https://forms.gle/VcQRajTUrSdYAycWA" target="_blank" class="vac-btn" data-i18n="btn.apply">Откликнуться</a>
         </div>
       </div>
 
@@ -1615,23 +1665,23 @@
         <div class="vac-head">
           <img class="vac-mode-icon" src="assets/images/vacancies/wild.webp" alt="Вольный">
           <div class="vac-head-info">
-            <div class="vac-eyebrow">Автор · Контент</div>
-            <div class="vac-title">Вольный режим</div>
+            <div class="vac-eyebrow" data-i18n="vac.authorContent">Автор · Контент</div>
+            <div class="vac-title" data-i18n="vac.wild.title">Вольный режим</div>
           </div>
         </div>
         <div class="vac-body">
-          <div class="vac-desc">Ищем «ветерана» с обширной коллекцией карт всех дополнений, знающего OTK-комбинации и способного предугадывать, как свежие релизы ломают баланс Вольного.</div>
+          <div class="vac-desc" data-i18n="vac.wild.desc">Ищем «ветерана» с обширной коллекцией карт всех дополнений, знающего OTK-комбинации и способного предугадывать, как свежие релизы ломают баланс Вольного.</div>
           <div class="vac-tags">
-            <span class="tag tag-g">Легенда / Ветеран</span>
+            <span class="tag tag-g" data-i18n="vac.wild.tag1">Легенда / Ветеран</span>
             <span class="tag tag-b">OTK-механики</span>
-            <span class="tag tag-b">Вся коллекция</span>
+            <span class="tag tag-b" data-i18n="vac.wild.tag3">Вся коллекция</span>
           </div>
           <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
-            <span>Требования</span>
+            <span data-i18n="vac.requirements">Требования</span>
             <span class="vac-toggle-arrow">▼</span>
           </button>
           <div class="vac-reqs">
-            <ul>
+            <ul data-i18n-html="vac.wild.reqs">
               <li>Ранг Легенды обязателен; ценится статус ветерана с полной коллекцией</li>
               <li>Знание OTK-комбинаций и гипер-агро колод формата</li>
               <li>Понимание нишевых взаимодействий старых карт с новыми</li>
@@ -1642,8 +1692,8 @@
           </div>
         </div>
         <div class="vac-foot">
-          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
-          <a href="https://forms.gle/S4zbcxu5eZTSEFjR8" target="_blank" class="vac-btn">Откликнуться</a>
+          <div class="vac-remote"><span class="vac-remote-dot"></span><span data-i18n="vac.remote">Удалённо · Авторство</span></div>
+          <a href="https://forms.gle/S4zbcxu5eZTSEFjR8" target="_blank" class="vac-btn" data-i18n="btn.apply">Откликнуться</a>
         </div>
       </div>
 
@@ -1651,12 +1701,12 @@
 
     <!-- Общая форма -->
     <div class="vac-general reveal">
-      <div class="vac-general-text">
+      <div class="vac-general-text" data-i18n="vac.general">
         Не нашли подходящей позиции? Мы рады всем единомышленникам, готовым работать на благо русскоязычного Hearthstone-сообщества!
       </div>
       <a href="https://forms.gle/Aet8Yhn1ucn5x5RB7" target="_blank" class="btn-partner">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-        Подать общую заявку
+        <span data-i18n="btn.applyGeneral">Подать общую заявку</span>
       </a>
     </div>
   </section>
@@ -1670,8 +1720,8 @@
   <!-- ===== SERVICES ===== -->
   <section id="services">
     <div class="sec-head reveal">
-      <div class="sec-eyebrow">Разработка на заказ</div>
-      <div class="sec-title">Услуги</div>
+      <div class="sec-eyebrow" data-i18n="srv.eyebrow">Разработка на заказ</div>
+      <div class="sec-title" data-i18n="srv.title">Услуги</div>
       <div class="sec-rule"></div>
     </div>
 
@@ -1679,12 +1729,12 @@
 
       <!-- Разработка -->
       <div class="srv-card reveal">
-        <div class="srv-eyebrow">Веб-разработка · Боты</div>
-        <div class="srv-title">Создадим сайт или бот под ваши задачи</div>
-        <p class="srv-text">
+        <div class="srv-eyebrow" data-i18n="srv.dev.eyebrow">Веб-разработка · Боты</div>
+        <div class="srv-title" data-i18n="srv.dev.title">Создадим сайт или бот под ваши задачи</div>
+        <p class="srv-text" data-i18n="srv.dev.text">
           Наша команда занимается разработкой сайтов и Telegram-ботов на заказ. Мы можем создать как тематический ресурс по играм Blizzard, так и различные чат-боты или мини-приложения (Web Apps) внутри мессенджера.
         </p>
-        <ul class="srv-list">
+        <ul class="srv-list" data-i18n-html="srv.dev.list">
           <li>Тематические сайты и порталы по играм Blizzard</li>
           <li>Telegram-боты любой сложности</li>
           <li>Mini Apps (Web Apps) внутри Telegram</li>
@@ -1693,42 +1743,42 @@
         </ul>
         <a href="https://t.me/LordZulut" target="_blank" class="srv-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
-          Обсудить стоимость
+          <span data-i18n="btn.discuss">Обсудить стоимость</span>
         </a>
       </div>
 
       <!-- Реклама -->
       <div class="srv-card reveal" style="transition-delay:.1s">
-        <div class="srv-eyebrow">Реклама · Размещение</div>
-        <div class="srv-title">Рекламируйтесь у нас</div>
-        <p class="srv-text">
+        <div class="srv-eyebrow" data-i18n="srv.adv.eyebrow">Реклама · Размещение</div>
+        <div class="srv-title" data-i18n="srv.adv.title">Рекламируйтесь у нас</div>
+        <p class="srv-text" data-i18n="srv.adv.text">
           Охватите самую активную русскоязычную аудиторию Hearthstone. Размещаем рекламу на наших платформах с суммарной аудиторией свыше 600 тысяч человек.
         </p>
         <div class="adv-stats">
           <div class="adv-stat">
             <span class="adv-stat-num">108 тыс.</span>
-            <span class="adv-stat-label">подписчиков ВКонтакте</span>
+            <span class="adv-stat-label" data-i18n="stats.vk">подписчиков ВКонтакте</span>
           </div>
           <div class="adv-stat">
             <span class="adv-stat-num">7,5 тыс.</span>
-            <span class="adv-stat-label">подписчиков Telegram</span>
+            <span class="adv-stat-label" data-i18n="stats.tg2">подписчиков Telegram</span>
           </div>
           <div class="adv-stat">
             <span class="adv-stat-num">500 тыс.</span>
-            <span class="adv-stat-label">посещений сайтов в месяц</span>
+            <span class="adv-stat-label" data-i18n="stats.visits">посещений сайтов в месяц</span>
           </div>
         </div>
         <div class="adv-formats">
-          <span class="adv-format">Пост ВКонтакте</span>
-          <span class="adv-format">Telegram-пост</span>
-          <span class="adv-format">Баннер на сайте</span>
-          <span class="adv-format">Спецпроект</span>
-          <span class="adv-format">Статья / гайд</span>
+          <span class="adv-format" data-i18n="adv.f1">Пост ВКонтакте</span>
+          <span class="adv-format" data-i18n="adv.f2">Telegram-пост</span>
+          <span class="adv-format" data-i18n="adv.f3">Баннер на сайте</span>
+          <span class="adv-format" data-i18n="adv.f4">Спецпроект</span>
+          <span class="adv-format" data-i18n="adv.f5">Статья / гайд</span>
           <span class="adv-format">Boosty</span>
         </div>
         <a href="https://t.me/LordZulut" target="_blank" class="srv-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
-          Написать по рекламе
+          <span data-i18n="btn.adContact">Написать по рекламе</span>
         </a>
       </div>
 
@@ -1744,8 +1794,8 @@
   <!-- ===== CONTACTS ===== -->
   <section id="contacts">
     <div class="sec-head reveal">
-      <div class="sec-eyebrow">Связь с командой</div>
-      <div class="sec-title">Контакты</div>
+      <div class="sec-eyebrow" data-i18n="contacts.eyebrow">Связь с командой</div>
+      <div class="sec-title" data-i18n="contacts.title">Контакты</div>
       <div class="sec-rule"></div>
     </div>
 
@@ -1756,7 +1806,7 @@
           <svg class="ct-img" viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         </div>
         <div class="ct-info">
-          <div class="ct-label">Email</div>
+          <div class="ct-label" data-i18n="ct.email">Email</div>
           <div class="ct-value">admin@hs-manacost.ru</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1767,7 +1817,7 @@
           <img class="ct-img" src="assets/images/social/telegram.png" alt="Telegram" loading="lazy">
         </div>
         <div class="ct-info">
-          <div class="ct-label">Telegram-канал</div>
+          <div class="ct-label" data-i18n="ct.tgChannel">Telegram-канал</div>
           <div class="ct-value">@manacost_ru</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1778,7 +1828,7 @@
           <img class="ct-img" src="assets/images/social/vk.svg" alt="ВКонтакте" loading="lazy">
         </div>
         <div class="ct-info">
-          <div class="ct-label">ВКонтакте</div>
+          <div class="ct-label" data-i18n="ct.vk">ВКонтакте</div>
           <div class="ct-value">vk.com/manacost</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1789,7 +1839,7 @@
           <img class="ct-img" src="assets/images/social/boosty.png" alt="Boosty" loading="lazy">
         </div>
         <div class="ct-info">
-          <div class="ct-label">Boosty</div>
+          <div class="ct-label" data-i18n="ct.boosty">Boosty</div>
           <div class="ct-value">kolodahearthstone</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1800,7 +1850,7 @@
           <img class="ct-img" src="assets/images/social/telegram.png" alt="Техподдержка" loading="lazy">
         </div>
         <div class="ct-info">
-          <div class="ct-label">Техподдержка</div>
+          <div class="ct-label" data-i18n="ct.support">Техподдержка</div>
           <div class="ct-value">@manacostHS</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1811,7 +1861,7 @@
           <img class="ct-img" src="assets/images/social/telegram.png" alt="Реклама" loading="lazy">
         </div>
         <div class="ct-info">
-          <div class="ct-label">Реклама</div>
+          <div class="ct-label" data-i18n="ct.ads">Реклама</div>
           <div class="ct-value">@LordZulut</div>
         </div>
         <span class="ct-arrow">›</span>
@@ -1823,7 +1873,7 @@
   <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-name">Manacost Dev</div>
-    <div class="footer-copy">
+    <div class="footer-copy" data-i18n-html="footer.copy">
       © 2026 Manacost Dev · Все права защищены<br>
       Сайт не связан с Blizzard Entertainment. Hearthstone® — товарный знак Blizzard Entertainment, Inc.<br>
       <a href="mailto:admin@hs-manacost.ru">admin@hs-manacost.ru</a>
@@ -1944,8 +1994,310 @@ function toggleReqs(btn) {
   const isOpen = reqs.classList.contains('open');
   reqs.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
-  btn.querySelector('span:first-child').textContent = isOpen ? 'Требования' : 'Свернуть';
+  const t = TRANSLATIONS[currentLang] || TRANSLATIONS['ru'];
+  btn.querySelector('span:first-child').textContent = isOpen ? (t['vac.requirements'] || 'Требования') : (t['vac.collapse'] || 'Свернуть');
 }
+
+// ===== I18N =====
+const TRANSLATIONS = {
+  ru: {
+    'nav.projects': 'Проекты',
+    'nav.partners': 'Партнёры',
+    'nav.vacancies': 'Вакансии',
+    'nav.services': 'Услуги',
+    'nav.contacts': 'Контакты',
+    'hero.sub': 'Команда разработчиков · Hearthstone community',
+    'hero.desc': 'Мы команда энтузиастов, которая стремится развивать русскоязычное сообщество по Hearthstone.',
+    'hero.pill1': 'Активная разработка',
+    'hero.pill2': '4 живых проекта',
+    'hero.pill3': 'Открытые вакансии',
+    'hero.scroll': 'Листай вниз',
+    'stats.vk': 'подписчиков ВКонтакте',
+    'stats.tg': 'подписчиков в Telegram',
+    'stats.tg2': 'подписчиков Telegram',
+    'stats.visits': 'посещений сайтов в месяц',
+    'projects.eyebrow': 'Наши проекты',
+    'projects.title': 'Проекты разработанные нашей командой',
+    'proj1.klass': 'СМИ · Гайды · Колоды',
+    'proj1.text': 'Самое крупное СМИ по Hearthstone на русском языке. Подборки колод, регулярные гайды и справочники для игроков любого уровня.',
+    'proj2.klass': 'Подписка · Авторские гайды · Мета',
+    'proj2.text': 'Закрытый клуб по подписке с уникальными авторскими гайдами и глубокими разборами актуальной меты от экспертов.',
+    'proj3.klass': 'Арена · Статистика',
+    'proj3.text': 'Лучший сайт со статистикой по режиму Арены. Актуальные данные, рейтинги карт и всё необходимое для победных ранов.',
+    'proj4.klass': 'Telegram Bot · Конструктор',
+    'proj4.text': 'Телеграм-бот, который генерирует красивую картинку колоды по её коду. Поделись своей сборкой одним скриншотом!',
+    'btn.openSite': 'Открыть сайт',
+    'btn.openBot': 'Открыть бота',
+    'partners.eyebrow': 'Сотрудничество',
+    'partners.title': 'Мы работали с',
+    'partners.cta': 'Хотите сотрудничать с нами?',
+    'btn.adContact': 'Написать по рекламе',
+    'vac.eyebrow': 'Присоединяйся к команде',
+    'vac.title': 'Вакансии',
+    'vac.authorContent': 'Автор · Контент',
+    'vac.arena.title': 'Режим Арена',
+    'vac.arena.desc': 'Ищем опытного игрока в Арену, способного стабильно брать 5–7 побед за забег и писать качественные гайды с аргументацией каждого выбора карты.',
+    'vac.arena.tag1': '5–7 побед за забег',
+    'vac.arena.tag3': 'Кривая маны',
+    'vac.arena.reqs': '<li>Стабильный средний результат 5–7 побед за забег</li><li>Регулярная игра в актуальных патчах и знание обновлений формата</li><li>Глубокое понимание кривой маны и синергии при драфте</li><li>Умение аргументированно объяснять логику выбора карт (не только винрейт)</li><li>Навык структурированного письма без «воды», грамотная игровая терминология</li><li>Уверенная работа с HSReplay и Firestone для подкрепления советов данными</li><li>Готовность оперативно публиковать материалы после выхода патчей</li>',
+    'vac.bg.title': 'Поля Сражений',
+    'vac.bg.desc': 'Нужен игрок с высоким MMR, который умеет объяснять позиционирование, составлять тир-листы героев и быстро адаптироваться к сезонным механикам.',
+    'vac.bg.tag3': 'Архетипы',
+    'vac.bg.reqs': '<li>Стабильный MMR от 8 000+ (подтверждает игру в сильных лобби)</li><li>Активная игра каждый сезон с учётом сброса рейтинга</li><li>Знание кривых прокачки таверны (стандартная, Рафаам, агрессивная и др.)</li><li>Знание всех архетипов: Звери, Мурлоки, Нежить, Демоны — и ключевых карт лейтгейма</li><li>Быстрая адаптация к сезонным механикам: квесты, аномалии, брелоки</li><li>Умение объяснять позиционирование и порядок предсмертных хрипов</li><li>Составление тир-листов героев с обоснованием, опираясь на сложность исполнения</li><li>Уверенная работа с HSReplay Tier7 / Firestone для анализа статистики</li><li>Публикация обзоров патчноутов в день выхода</li>',
+    'vac.std.title': 'Стандартный режим',
+    'vac.std.desc': 'Ищем Легенд-игрока, способного писать детальные гайды на колоды: муллиган, стратегии по стадиям игры и анализ матч-апов для всей аудитории — от новичка до профи.',
+    'vac.std.tag1': 'Легенда ежемесячно',
+    'vac.std.tag3': 'Матч-апы',
+    'vac.std.reqs': '<li>Ежемесячное взятие ранга Легенды; идеально — топ-500/1000</li><li>Глубокое понимание win conditions всех актуальных колод</li><li>Анализ матч-апов и умение определять правильные tech cards</li><li>Написание детальных гайдов: муллиган, ранняя / мид / лейт стратегия</li><li>Подбор бюджетных замен легендарных карт для новичков</li><li>Опыт участия в турнирах или квалификациях — плюс</li>',
+    'vac.wild.title': 'Вольный режим',
+    'vac.wild.desc': 'Ищем «ветерана» с обширной коллекцией карт всех дополнений, знающего OTK-комбинации и способного предугадывать, как свежие релизы ломают баланс Вольного.',
+    'vac.wild.tag1': 'Легенда / Ветеран',
+    'vac.wild.tag3': 'Вся коллекция',
+    'vac.wild.reqs': '<li>Ранг Легенды обязателен; ценится статус ветерана с полной коллекцией</li><li>Знание OTK-комбинаций и гипер-агро колод формата</li><li>Понимание нишевых взаимодействий старых карт с новыми</li><li>Написание гайдов: муллиган, стратегия по стадиям, анализ матч-апов</li><li>Подбор бюджетных замен для новичков</li><li>Приветствуется знание китайских мета-отчётов и Discord-сообществ Вольного</li>',
+    'vac.requirements': 'Требования',
+    'vac.collapse': 'Свернуть',
+    'vac.remote': 'Удалённо · Авторство',
+    'vac.general': 'Не нашли подходящей позиции? Мы рады всем единомышленникам, готовым работать на благо русскоязычного Hearthstone-сообщества!',
+    'btn.apply': 'Откликнуться',
+    'btn.applyGeneral': 'Подать общую заявку',
+    'srv.eyebrow': 'Разработка на заказ',
+    'srv.title': 'Услуги',
+    'srv.dev.eyebrow': 'Веб-разработка · Боты',
+    'srv.dev.title': 'Создадим сайт или бот под ваши задачи',
+    'srv.dev.text': 'Наша команда занимается разработкой сайтов и Telegram-ботов на заказ. Мы можем создать как тематический ресурс по играм Blizzard, так и различные чат-боты или мини-приложения (Web Apps) внутри мессенджера.',
+    'srv.dev.list': '<li>Тематические сайты и порталы по играм Blizzard</li><li>Telegram-боты любой сложности</li><li>Mini Apps (Web Apps) внутри Telegram</li><li>Дизайн в стиле Hearthstone и Warcraft</li><li>Поддержка и доработка готовых проектов</li>',
+    'btn.discuss': 'Обсудить стоимость',
+    'srv.adv.eyebrow': 'Реклама · Размещение',
+    'srv.adv.title': 'Рекламируйтесь у нас',
+    'srv.adv.text': 'Охватите самую активную русскоязычную аудиторию Hearthstone. Размещаем рекламу на наших платформах с суммарной аудиторией свыше 600 тысяч человек.',
+    'adv.f1': 'Пост ВКонтакте',
+    'adv.f2': 'Telegram-пост',
+    'adv.f3': 'Баннер на сайте',
+    'adv.f4': 'Спецпроект',
+    'adv.f5': 'Статья / гайд',
+    'contacts.eyebrow': 'Связь с командой',
+    'contacts.title': 'Контакты',
+    'ct.email': 'Email',
+    'ct.tgChannel': 'Telegram-канал',
+    'ct.vk': 'ВКонтакте',
+    'ct.boosty': 'Boosty',
+    'ct.support': 'Техподдержка',
+    'ct.ads': 'Реклама',
+    'footer.copy': '© 2026 Manacost Dev · Все права защищены<br>Сайт не связан с Blizzard Entertainment. Hearthstone® — товарный знак Blizzard Entertainment, Inc.<br><a href="mailto:admin@hs-manacost.ru">admin@hs-manacost.ru</a>',
+  },
+  en: {
+    'nav.projects': 'Projects',
+    'nav.partners': 'Partners',
+    'nav.vacancies': 'Vacancies',
+    'nav.services': 'Services',
+    'nav.contacts': 'Contacts',
+    'hero.sub': 'Developer Team · Hearthstone Community',
+    'hero.desc': 'We are a team of enthusiasts striving to develop the Russian-speaking Hearthstone community.',
+    'hero.pill1': 'Active development',
+    'hero.pill2': '4 live projects',
+    'hero.pill3': 'Open vacancies',
+    'hero.scroll': 'Scroll down',
+    'stats.vk': 'VKontakte subscribers',
+    'stats.tg': 'Telegram subscribers',
+    'stats.tg2': 'Telegram subscribers',
+    'stats.visits': 'site visits per month',
+    'projects.eyebrow': 'Our projects',
+    'projects.title': 'Projects developed by our team',
+    'proj1.klass': 'Media · Guides · Decks',
+    'proj1.text': 'The largest Hearthstone media outlet in Russian. Deck collections, regular guides and references for players of all levels.',
+    'proj2.klass': 'Subscription · Author guides · Meta',
+    'proj2.text': 'A closed subscription club with unique author guides and deep meta breakdowns from experts.',
+    'proj3.klass': 'Arena · Statistics',
+    'proj3.text': 'The best site for Arena mode statistics. Up-to-date data, card ratings and everything you need for winning runs.',
+    'proj4.klass': 'Telegram Bot · Builder',
+    'proj4.text': 'A Telegram bot that generates a beautiful deck image from its code. Share your build in one screenshot!',
+    'btn.openSite': 'Open site',
+    'btn.openBot': 'Open bot',
+    'partners.eyebrow': 'Cooperation',
+    'partners.title': 'We worked with',
+    'partners.cta': 'Want to work with us?',
+    'btn.adContact': 'Contact for advertising',
+    'vac.eyebrow': 'Join the team',
+    'vac.title': 'Vacancies',
+    'vac.authorContent': 'Author · Content',
+    'vac.arena.title': 'Arena Mode',
+    'vac.arena.desc': 'We are looking for an experienced Arena player who can consistently achieve 5–7 wins per run and write quality guides with justification for each card choice.',
+    'vac.arena.tag1': '5–7 wins per run',
+    'vac.arena.tag3': 'Mana curve',
+    'vac.arena.reqs': '<li>Consistent average result of 5–7 wins per run</li><li>Regular play in current patches and knowledge of format updates</li><li>Deep understanding of mana curve and synergy during draft</li><li>Ability to explain card selection logic (not just winrate)</li><li>Structured writing skill without filler, correct game terminology</li><li>Confident use of HSReplay and Firestone to support advice with data</li><li>Readiness to publish materials quickly after patch releases</li>',
+    'vac.bg.title': 'Battlegrounds',
+    'vac.bg.desc': 'We need a player with high MMR who can explain positioning, create hero tier lists and quickly adapt to seasonal mechanics.',
+    'vac.bg.tag3': 'Archetypes',
+    'vac.bg.reqs': '<li>Stable MMR of 8,000+ (confirms play in strong lobbies)</li><li>Active play every season accounting for rating resets</li><li>Knowledge of tavern upgrade curves (standard, Rafaam, aggressive, etc.)</li><li>Knowledge of all archetypes: Beasts, Murlocs, Undead, Demons — and key late-game cards</li><li>Quick adaptation to seasonal mechanics: quests, anomalies, trinkets</li><li>Ability to explain positioning and deathrattle order</li><li>Hero tier list creation with justification based on execution difficulty</li><li>Confident use of HSReplay Tier7 / Firestone for statistics analysis</li><li>Publishing patch note reviews on release day</li>',
+    'vac.std.title': 'Standard Mode',
+    'vac.std.desc': 'We are looking for a Legend-rank player who can write detailed deck guides: mulligan, stage-based strategies and matchup analysis for all audiences — from beginner to pro.',
+    'vac.std.tag1': 'Legend monthly',
+    'vac.std.tag3': 'Matchups',
+    'vac.std.reqs': '<li>Monthly Legend rank; ideally top 500/1000</li><li>Deep understanding of win conditions of all current decks</li><li>Matchup analysis and ability to identify correct tech cards</li><li>Writing detailed guides: mulligan, early / mid / late game strategy</li><li>Budget replacements for legendary cards for beginners</li><li>Tournament or qualifier experience is a plus</li>',
+    'vac.wild.title': 'Wild Mode',
+    'vac.wild.desc': 'Looking for a "veteran" with an extensive card collection from all expansions, who knows OTK combos and can predict how new releases break Wild balance.',
+    'vac.wild.tag1': 'Legend / Veteran',
+    'vac.wild.tag3': 'Full collection',
+    'vac.wild.reqs': '<li>Legend rank required; veteran status with full collection is valued</li><li>Knowledge of OTK combos and hyper-aggressive decks</li><li>Understanding of niche interactions between old and new cards</li><li>Writing guides: mulligan, stage-based strategy, matchup analysis</li><li>Budget replacements for beginners</li><li>Knowledge of Chinese meta reports and Wild Discord communities is a plus</li>',
+    'vac.requirements': 'Requirements',
+    'vac.collapse': 'Collapse',
+    'vac.remote': 'Remote · Authorship',
+    'vac.general': 'Did not find a suitable position? We welcome all like-minded people ready to work for the benefit of the Hearthstone community!',
+    'btn.apply': 'Apply',
+    'btn.applyGeneral': 'Submit general application',
+    'srv.eyebrow': 'Custom development',
+    'srv.title': 'Services',
+    'srv.dev.eyebrow': 'Web development · Bots',
+    'srv.dev.title': 'We will create a website or bot for your needs',
+    'srv.dev.text': 'Our team develops websites and Telegram bots on demand. We can create both a thematic resource for Blizzard games and various chatbots or mini-applications (Web Apps) inside the messenger.',
+    'srv.dev.list': '<li>Thematic sites and portals for Blizzard games</li><li>Telegram bots of any complexity</li><li>Mini Apps (Web Apps) inside Telegram</li><li>Design in Hearthstone and Warcraft style</li><li>Support and development of existing projects</li>',
+    'btn.discuss': 'Discuss pricing',
+    'srv.adv.eyebrow': 'Advertising · Placement',
+    'srv.adv.title': 'Advertise with us',
+    'srv.adv.text': 'Reach the most active Russian-speaking Hearthstone audience. We place ads on our platforms with a total audience of over 600 thousand people.',
+    'adv.f1': 'VKontakte post',
+    'adv.f2': 'Telegram post',
+    'adv.f3': 'Website banner',
+    'adv.f4': 'Special project',
+    'adv.f5': 'Article / guide',
+    'contacts.eyebrow': 'Contact the team',
+    'contacts.title': 'Contacts',
+    'ct.email': 'Email',
+    'ct.tgChannel': 'Telegram channel',
+    'ct.vk': 'VKontakte',
+    'ct.boosty': 'Boosty',
+    'ct.support': 'Tech support',
+    'ct.ads': 'Advertising',
+    'footer.copy': '© 2026 Manacost Dev · All rights reserved<br>Not affiliated with Blizzard Entertainment. Hearthstone® is a trademark of Blizzard Entertainment, Inc.<br><a href="mailto:admin@hs-manacost.ru">admin@hs-manacost.ru</a>',
+  },
+  pl: {
+    'nav.projects': 'Projekty',
+    'nav.partners': 'Partnerzy',
+    'nav.vacancies': 'Praca',
+    'nav.services': 'Usługi',
+    'nav.contacts': 'Kontakt',
+    'hero.sub': 'Zespół deweloperów · Społeczność Hearthstone',
+    'hero.desc': 'Jesteśmy zespołem entuzjastów dążącym do rozwoju rosyjskojęzycznej społeczności Hearthstone.',
+    'hero.pill1': 'Aktywny rozwój',
+    'hero.pill2': '4 projekty',
+    'hero.pill3': 'Otwarte oferty',
+    'hero.scroll': 'Przewiń w dół',
+    'stats.vk': 'obserwujących VKontakte',
+    'stats.tg': 'obserwujących Telegram',
+    'stats.tg2': 'obserwujących Telegram',
+    'stats.visits': 'odwiedzin stron miesięcznie',
+    'projects.eyebrow': 'Nasze projekty',
+    'projects.title': 'Projekty opracowane przez nasz zespół',
+    'proj1.klass': 'Media · Poradniki · Talie',
+    'proj1.text': 'Największe medium o Hearthstone w języku rosyjskim. Kolekcje talii, regularne poradniki i bazy wiedzy dla graczy na każdym poziomie.',
+    'proj2.klass': 'Subskrypcja · Autorskie poradniki · Meta',
+    'proj2.text': 'Zamknięty klub subskrypcyjny z unikalnymi autorskimi poradnikami i dogłębną analizą aktualnej mety od ekspertów.',
+    'proj3.klass': 'Arena · Statystyki',
+    'proj3.text': 'Najlepsza strona ze statystykami trybu Arena. Aktualne dane, rankingi kart i wszystko niezbędne do zwycięskich przebiegów.',
+    'proj4.klass': 'Bot Telegram · Kreator',
+    'proj4.text': 'Bot Telegram generujący piękny obraz talii na podstawie jej kodu. Podziel się swoją budową jednym zrzutem ekranu!',
+    'btn.openSite': 'Otwórz stronę',
+    'btn.openBot': 'Otwórz bota',
+    'partners.eyebrow': 'Współpraca',
+    'partners.title': 'Pracowaliśmy z',
+    'partners.cta': 'Chcesz z nami współpracować?',
+    'btn.adContact': 'Napisz ws. reklamy',
+    'vac.eyebrow': 'Dołącz do zespołu',
+    'vac.title': 'Oferty pracy',
+    'vac.authorContent': 'Autor · Treści',
+    'vac.arena.title': 'Tryb Arena',
+    'vac.arena.desc': 'Szukamy doświadczonego gracza w Arenie, zdolnego stabilnie osiągać 5–7 zwycięstw na run i pisać wysokiej jakości poradniki z uzasadnieniem każdego wyboru karty.',
+    'vac.arena.tag1': '5–7 zwycięstw na run',
+    'vac.arena.tag3': 'Krzywa many',
+    'vac.arena.reqs': '<li>Stabilny średni wynik 5–7 zwycięstw na run</li><li>Regularna gra w aktualnych patchach i znajomość aktualizacji formatu</li><li>Głębokie rozumienie krzywej many i synergii podczas draftu</li><li>Umiejętność uzasadniania logiki wyboru kart (nie tylko winrate)</li><li>Umiejętność pisania bez lania wody, poprawna terminologia gry</li><li>Pewne posługiwanie się HSReplay i Firestone do popierania rad danymi</li><li>Gotowość do szybkiej publikacji materiałów po patchach</li>',
+    'vac.bg.title': 'Pola Bitew',
+    'vac.bg.desc': 'Potrzebny gracz z wysokim MMR, który potrafi wyjaśniać pozycjonowanie, tworzyć tier listy bohaterów i szybko adaptować się do sezonowych mechanik.',
+    'vac.bg.tag3': 'Archetypy',
+    'vac.bg.reqs': '<li>Stabilne MMR 8 000+ (potwierdza grę w mocnych lobby)</li><li>Aktywna gra każdego sezonu z uwzględnieniem resetów ratingu</li><li>Znajomość krzywych ulepszania tawerny (standardowa, Rafaam, agresywna itp.)</li><li>Znajomość wszystkich archetypów: Bestie, Mrloki, Nieumarli, Demony — i kluczowych kart late-game</li><li>Szybka adaptacja do sezonowych mechanik: questy, anomalie, bibeloty</li><li>Umiejętność wyjaśniania pozycjonowania i kolejności battle cry po śmierci</li><li>Tworzenie tier list bohaterów z uzasadnieniem opartym na trudności wykonania</li><li>Pewne posługiwanie się HSReplay Tier7 / Firestone do analizy statystyk</li><li>Publikowanie recenzji notatek patchowych w dniu wydania</li>',
+    'vac.std.title': 'Tryb Standardowy',
+    'vac.std.desc': 'Szukamy gracza rangi Legend, zdolnego pisać szczegółowe poradniki do talii: mulligan, strategie etapowe i analizę starć dla wszystkich — od nowicjusza do pro.',
+    'vac.std.tag1': 'Legenda co miesiąc',
+    'vac.std.tag3': 'Starcia',
+    'vac.std.reqs': '<li>Miesięczne osiąganie rangi Legend; najlepiej top 500/1000</li><li>Głębokie rozumienie win conditions wszystkich aktualnych talii</li><li>Analiza starć i umiejętność dobierania tech cards</li><li>Pisanie szczegółowych poradników: mulligan, strategia early/mid/late</li><li>Dobór budżetowych zamienników legendarnych kart dla nowicjuszy</li><li>Doświadczenie turniejowe lub kwalifikacyjne jest plusem</li>',
+    'vac.wild.title': 'Tryb Dziki',
+    'vac.wild.desc': 'Szukamy „weterana" z rozległą kolekcją kart ze wszystkich dodatków, znającego combo OTK i potrafiącego przewidzieć, jak nowe wydania niszczą balans Dzikiego.',
+    'vac.wild.tag1': 'Legenda / Weteran',
+    'vac.wild.tag3': 'Pełna kolekcja',
+    'vac.wild.reqs': '<li>Ranga Legend wymagana; status weterana z pełną kolekcją jest ceniony</li><li>Znajomość combo OTK i hiper-agresywnych talii formatu</li><li>Rozumienie niszowych interakcji starych kart z nowymi</li><li>Pisanie poradników: mulligan, strategia etapowa, analiza starć</li><li>Dobór budżetowych zamienników dla nowicjuszy</li><li>Znajomość chińskich raportów meta i serwerów Discord Dzikiego jest plusem</li>',
+    'vac.requirements': 'Wymagania',
+    'vac.collapse': 'Zwiń',
+    'vac.remote': 'Zdalnie · Autorstwo',
+    'vac.general': 'Nie znalazłeś odpowiedniej pozycji? Zapraszamy wszystkich entuzjastów gotowych pracować na rzecz społeczności Hearthstone!',
+    'btn.apply': 'Aplikuj',
+    'btn.applyGeneral': 'Złóż ogólne zgłoszenie',
+    'srv.eyebrow': 'Programowanie na zamówienie',
+    'srv.title': 'Usługi',
+    'srv.dev.eyebrow': 'Tworzenie stron · Boty',
+    'srv.dev.title': 'Stworzymy stronę lub bota dla Twoich potrzeb',
+    'srv.dev.text': 'Nasz zespół tworzy strony internetowe i boty Telegram na zamówienie. Możemy stworzyć zarówno tematyczny serwis o grach Blizzard, jak i różne chatboty lub mini-aplikacje (Web Apps) wewnątrz komunikatora.',
+    'srv.dev.list': '<li>Tematyczne strony i portale o grach Blizzard</li><li>Boty Telegram dowolnej złożoności</li><li>Mini Apps (Web Apps) wewnątrz Telegram</li><li>Design w stylu Hearthstone i Warcraft</li><li>Wsparcie i rozwój istniejących projektów</li>',
+    'btn.discuss': 'Omów cenę',
+    'srv.adv.eyebrow': 'Reklama · Publikacja',
+    'srv.adv.title': 'Reklamuj się u nas',
+    'srv.adv.text': 'Dotrzyj do najbardziej aktywnej rosyjskojęzycznej publiczności Hearthstone. Umieszczamy reklamy na naszych platformach z łączną publicznością ponad 600 tysięcy osób.',
+    'adv.f1': 'Post VKontakte',
+    'adv.f2': 'Post Telegram',
+    'adv.f3': 'Baner na stronie',
+    'adv.f4': 'Projekt specjalny',
+    'adv.f5': 'Artykuł / poradnik',
+    'contacts.eyebrow': 'Skontaktuj się z nami',
+    'contacts.title': 'Kontakt',
+    'ct.email': 'E-mail',
+    'ct.tgChannel': 'Kanał Telegram',
+    'ct.vk': 'VKontakte',
+    'ct.boosty': 'Boosty',
+    'ct.support': 'Wsparcie techniczne',
+    'ct.ads': 'Reklama',
+    'footer.copy': '© 2026 Manacost Dev · Wszelkie prawa zastrzeżone<br>Strona nie jest powiązana z Blizzard Entertainment. Hearthstone® jest znakiem towarowym Blizzard Entertainment, Inc.<br><a href="mailto:admin@hs-manacost.ru">admin@hs-manacost.ru</a>',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'ru';
+
+function applyLang(lang) {
+  const t = TRANSLATIONS[lang];
+  if (!t) return;
+
+  // textContent elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // innerHTML elements
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update open accordion buttons to reflect new language
+  document.querySelectorAll('.vac-reqs-toggle.open').forEach(btn => {
+    const span = btn.querySelector('span:first-child');
+    if (span) span.textContent = t['vac.collapse'] || 'Свернуть';
+  });
+
+  // Update lang switcher buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+  currentLang = lang;
+}
+
+function setLang(lang) {
+  localStorage.setItem('lang', lang);
+  applyLang(lang);
+}
+
+// Apply on load
+applyLang(currentLang);
 </script>
 </body>
 </html>
