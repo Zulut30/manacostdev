@@ -812,24 +812,36 @@
     footer {
       position: relative; z-index: 1;
       border-top: 1px solid rgba(201,151,58,0.12);
-      padding: 40px 24px;
+      padding: 32px 24px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
     }
 
-    .footer-logo-img {
-      height: 50px; opacity: 0.5;
-      filter: drop-shadow(0 0 8px rgba(201,151,58,0.2));
-      margin-bottom: 12px;
-    }
-
-    .footer-hs {
-      height: 24px; opacity: 0.25; margin-bottom: 14px;
+    .footer-name {
+      font-family: 'HSFont', serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: rgba(201,151,58,0.5);
     }
 
     .footer-copy {
-      font-size: 0.78rem; color: var(--text-dim); opacity: 0.45;
-      line-height: 1.6;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.22);
+      line-height: 1.8;
+      letter-spacing: 0.04em;
     }
+
+    .footer-copy a {
+      color: rgba(201,151,58,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-copy a:hover { color: rgba(201,151,58,0.75); }
 
     /* ===== STATS BANNER ===== */
     .stats-banner {
@@ -1343,15 +1355,11 @@
 
   <!-- ===== FOOTER ===== -->
   <footer>
-    <div>
-      <img class="footer-logo-img" src="new-logo-20.png" alt="Manacost Dev">
-    </div>
-    <div>
-      <img class="footer-hs" src="Heartstone_2016_logo.png" alt="Hearthstone">
-    </div>
+    <div class="footer-name">Manacost Dev</div>
     <div class="footer-copy">
-      © 2024 Manacost Dev. Все права защищены.<br>
-      Не связано с Blizzard Entertainment. Hearthstone является товарным знаком Blizzard Entertainment.
+      © 2026 Manacost Dev · Все права защищены<br>
+      Сайт не связан с Blizzard Entertainment. Hearthstone® — товарный знак Blizzard Entertainment, Inc.<br>
+      <a href="mailto:admin@hs-manacost.ru">admin@hs-manacost.ru</a>
     </div>
   </footer>
 
