@@ -595,6 +595,75 @@
       line-height: 1.6;
     }
 
+    /* ===== STATS BANNER ===== */
+    .stats-banner {
+      max-width: 1160px; margin: 0 auto 20px;
+      padding: 0 24px;
+    }
+
+    .stats-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0;
+      background: linear-gradient(135deg, #1a1208 0%, #0f0b05 50%, #1a1208 100%);
+      border: 1px solid rgba(201,151,58,0.3);
+      border-radius: 12px;
+      padding: 36px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* top gold line */
+    .stats-inner::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* bottom gold line */
+    .stats-inner::after {
+      content: '';
+      position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .stat-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 10px; text-align: center;
+    }
+
+    .stat-icon {
+      width: 44px; height: 44px; object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(201,151,58,0.4));
+    }
+
+    .stat-num {
+      font-family: 'HSFont', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1;
+      background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 60%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(201,151,58,0.4));
+      letter-spacing: 0.02em;
+    }
+
+    .stat-label {
+      font-family: 'HSFont', serif; font-size: 0.78rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .stat-divider {
+      width: 1px; height: 90px; flex-shrink: 0;
+      background: linear-gradient(180deg, transparent, rgba(201,151,58,0.35), transparent);
+      margin: 0 48px;
+    }
+
+    @media (max-width: 500px) {
+      .stats-inner { flex-direction: column; gap: 28px; padding: 28px 24px; }
+      .stat-divider { width: 120px; height: 1px; margin: 0; }
+    }
+
     /* ===== REVEAL ===== */
     .reveal {
       opacity: 0; transform: translateY(28px);
@@ -665,6 +734,23 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"/>
       </svg>
+    </div>
+  </div>
+
+  <!-- ===== STATS BANNER ===== -->
+  <div class="stats-banner reveal">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <img class="stat-icon" src="vk.svg" alt="ВКонтакте">
+        <div class="stat-num" data-target="108000">0</div>
+        <div class="stat-label">подписчиков ВКонтакте</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <img class="stat-icon" src="telegram.png" alt="Telegram">
+        <div class="stat-num" data-target="7500">0</div>
+        <div class="stat-label">подписчиков в Telegram</div>
+      </div>
     </div>
   </div>
 
@@ -918,6 +1004,34 @@ const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ===== COUNTER ANIMATION =====
+function formatNum(n) {
+  if (n >= 1000) return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1).replace('.', ',') + ' тыс.';
+  return n.toString();
+}
+
+const counters = document.querySelectorAll('.stat-num');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target);
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatNum(Math.round(ease * target));
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = formatNum(target);
+    }
+    requestAnimationFrame(step);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(el => counterObs.observe(el));
 
 // ===== 3D CARD TILT =====
 document.querySelectorAll('.proj-card').forEach(card=>{
