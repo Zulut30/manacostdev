@@ -1030,9 +1030,9 @@ const counterObs = new IntersectionObserver(entries => {
       const p = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - p, 3);
       const val = formatNum(Math.round(ease * target));
-      el.textContent = (isPlus && p >= 1 ? 'свыше ' : '') + val;
+      el.textContent = val;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = (isPlus ? 'свыше ' : '') + formatNum(target);
+      else el.textContent = formatNum(target);
     }
     requestAnimationFrame(step);
     counterObs.unobserve(el);
