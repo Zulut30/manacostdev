@@ -516,69 +516,205 @@
     }
 
     /* ===== VACANCIES ===== */
-    .vac-list { display: flex; flex-direction: column; gap: 18px; }
+    .vac-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .vac-grid { grid-template-columns: 1fr; }
+    }
 
     .vac-card {
       position: relative; overflow: hidden;
-      display: flex; align-items: center; gap: 22px;
-      padding: 22px 28px;
-      background: linear-gradient(130deg, #181208 0%, #100d06 100%);
-      border: 1px solid rgba(201,151,58,0.18);
-      border-radius: 8px;
-      transition: all 0.3s;
+      display: flex; flex-direction: column;
+      background: linear-gradient(145deg, #16110a 0%, #0d0a05 100%);
+      border: 1px solid rgba(201,151,58,0.2);
+      border-radius: 12px;
+      transition: all 0.35s;
     }
 
-    .vac-card::before {
+    .vac-card::after {
       content: '';
-      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-      background: linear-gradient(180deg, var(--gold), var(--gold-light));
-      transform: scaleY(0); transform-origin: bottom;
-      transition: transform 0.35s ease;
+      position: absolute; inset: 0;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(201,151,58,0);
+      transition: box-shadow 0.35s;
+      pointer-events: none;
     }
 
-    .vac-card:hover {
-      border-color: rgba(201,151,58,0.38);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 22px rgba(201,151,58,0.07);
-      transform: translateX(5px);
+    .vac-card:hover { transform: translateY(-4px); border-color: rgba(201,151,58,0.45); }
+    .vac-card:hover::after { box-shadow: inset 0 0 0 1px rgba(201,151,58,0.18); }
+
+    /* шапка карточки */
+    .vac-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid rgba(201,151,58,0.12);
+      position: relative;
     }
 
-    .vac-card:hover::before { transform: scaleY(1); }
-
-    .vac-icon {
-      font-size: 2.4rem; min-width: 52px; text-align: center;
-      filter: drop-shadow(0 0 8px rgba(201,151,58,0.35));
+    .vac-head::before {
+      content: '';
+      position: absolute; bottom: -1px; left: 24px; right: 24px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,151,58,0.4), transparent);
     }
 
-    .vac-body { flex: 1; }
+    .vac-mode-icon {
+      width: 56px; height: 56px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(201,151,58,0.25);
+      box-shadow: 0 0 18px rgba(201,151,58,0.2);
+      flex-shrink: 0;
+    }
+
+    .vac-head-info { flex: 1; }
+
+    .vac-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(201,151,58,0.6);
+      margin-bottom: 4px;
+    }
 
     .vac-title {
-      font-family: 'HSFont', serif; font-size: 1.05rem;
-      color: var(--gold-light); margin-bottom: 5px;
+      font-family: 'HSFont', serif;
+      font-size: 1.15rem;
+      color: var(--gold-light);
       letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+
+    /* тело карточки */
+    .vac-body {
+      padding: 18px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .vac-desc {
-      font-size: 0.87rem; color: var(--text-dim); line-height: 1.65;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
     }
 
+    /* требования */
+    .vac-reqs-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: color 0.2s;
+    }
+
+    .vac-reqs-toggle:hover { color: var(--gold-light); }
+
+    .vac-toggle-arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-size: 0.7rem;
+    }
+
+    .vac-reqs-toggle.open .vac-toggle-arrow { transform: rotate(180deg); }
+
+    .vac-reqs {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .vac-reqs.open { max-height: 600px; }
+
+    .vac-reqs ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vac-reqs ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.55;
+    }
+
+    .vac-reqs ul li::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.5rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* теги */
     .vac-tags {
-      display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px;
+      display: flex; gap: 6px; flex-wrap: wrap;
     }
 
     .tag {
-      padding: 3px 9px; border-radius: 3px;
-      font-family: 'HSFont', serif; font-size: 0.58rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px;
+      font-family: 'Cinzel', serif; font-size: 0.58rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
     }
 
-    .tag-b { background: rgba(74,159,212,0.12); border: 1px solid rgba(74,159,212,0.28); color: #7ecff2; }
-    .tag-g { background: rgba(201,151,58,0.12); border: 1px solid rgba(201,151,58,0.28); color: var(--gold-light); }
-    .tag-gr { background: rgba(100,180,100,0.12); border: 1px solid rgba(100,180,100,0.28); color: #a5d6a7; }
+    .tag-b { background: rgba(74,159,212,0.1); border: 1px solid rgba(74,159,212,0.25); color: #7ecff2; }
+    .tag-g { background: rgba(201,151,58,0.1); border: 1px solid rgba(201,151,58,0.25); color: var(--gold-light); }
+    .tag-gr { background: rgba(100,180,100,0.1); border: 1px solid rgba(100,180,100,0.25); color: #a5d6a7; }
+
+    /* футер карточки */
+    .vac-foot {
+      padding: 16px 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid rgba(201,151,58,0.1);
+    }
+
+    .vac-remote {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .vac-remote-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #a5d6a7;
+      box-shadow: 0 0 6px #a5d6a7;
+      flex-shrink: 0;
+    }
 
     .vac-btn {
-      padding: 10px 22px;
+      padding: 10px 24px;
       background: linear-gradient(135deg, #c9973a, #9a6e1f);
-      border: none; border-radius: 4px;
+      border: none; border-radius: 5px;
       font-family: 'HSFont', serif; font-size: 0.72rem;
       letter-spacing: 0.1em; text-transform: uppercase;
       color: #0a0703; font-weight: bold;
@@ -593,16 +729,17 @@
       transform: translateY(-2px);
     }
 
+    /* общая заявка */
     .vac-general {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 18px;
-      margin-top: 48px;
+      margin-top: 32px;
       padding: 32px 40px;
       background: linear-gradient(130deg, #181208 0%, #100d06 100%);
-      border: 1px dashed rgba(201,151,58,0.3);
-      border-radius: 8px;
+      border: 1px dashed rgba(201,151,58,0.28);
+      border-radius: 10px;
       text-align: center;
     }
 
@@ -981,78 +1118,158 @@
       <div class="sec-rule"></div>
     </div>
 
-    <div class="vac-list">
+    <div class="vac-grid">
 
       <!-- Арена -->
       <div class="vac-card reveal">
-        <div class="vac-icon">🏟️</div>
-        <div class="vac-body">
-          <div class="vac-title">Автор по режиму Арена</div>
-          <div class="vac-desc">
-            Нужен игрок со стабильным средним результатом 5–7 побед за забег. Умение обосновывать выбор карт во время драфта, глубокое понимание кривой маны и синергии, навык работы со статистическими ресурсами (HSReplay, Firestone). Готовность оперативно публиковать материалы сразу после выхода патчей.
+        <div class="vac-head">
+          <img class="vac-mode-icon" src="job_logo/arena_icon.webp" alt="Арена">
+          <div class="vac-head-info">
+            <div class="vac-eyebrow">Автор · Контент</div>
+            <div class="vac-title">Режим Арена</div>
           </div>
+        </div>
+        <div class="vac-body">
+          <div class="vac-desc">Ищем опытного игрока в Арену, способного стабильно брать 5–7 побед за забег и писать качественные гайды с аргументацией каждого выбора карты.</div>
           <div class="vac-tags">
             <span class="tag tag-g">5–7 побед за забег</span>
             <span class="tag tag-b">HSReplay / Firestone</span>
-            <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Авторство</span>
+            <span class="tag tag-b">Кривая маны</span>
+          </div>
+          <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
+            <span>Требования</span>
+            <span class="vac-toggle-arrow">▼</span>
+          </button>
+          <div class="vac-reqs">
+            <ul>
+              <li>Стабильный средний результат 5–7 побед за забег</li>
+              <li>Регулярная игра в актуальных патчах и знание обновлений формата</li>
+              <li>Глубокое понимание кривой маны и синергии при драфте</li>
+              <li>Умение аргументированно объяснять логику выбора карт (не только винрейт)</li>
+              <li>Навык структурированного письма без «воды», грамотная игровая терминология</li>
+              <li>Уверенная работа с HSReplay и Firestone для подкрепления советов данными</li>
+              <li>Готовность оперативно публиковать материалы после выхода патчей</li>
+            </ul>
           </div>
         </div>
-        <a href="https://forms.gle/mFjbNRs1BQCsXgmC8" target="_blank" class="vac-btn">Откликнуться</a>
+        <div class="vac-foot">
+          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
+          <a href="https://forms.gle/mFjbNRs1BQCsXgmC8" target="_blank" class="vac-btn">Откликнуться</a>
+        </div>
       </div>
 
-      <!-- Поля сражений -->
-      <div class="vac-card reveal" style="transition-delay:.06s">
-        <div class="vac-icon">⚔️</div>
-        <div class="vac-body">
-          <div class="vac-title">Автор по режиму Поля Сражений</div>
-          <div class="vac-desc">
-            Требуется стабильный MMR от 8 000+. Знание актуальных кривых прокачки таверны, всех архетипов (Звери, Мурлоки, Нежить, Демоны и др.) и ключевых карт для победы в лейтгейме. Умение объяснять позиционирование, составлять тир-листы героев, быстро реагировать на сезонные механики.
+      <!-- Поля Сражений -->
+      <div class="vac-card reveal" style="transition-delay:.07s">
+        <div class="vac-head">
+          <img class="vac-mode-icon" src="job_logo/battleground.webp" alt="Поля Сражений">
+          <div class="vac-head-info">
+            <div class="vac-eyebrow">Автор · Контент</div>
+            <div class="vac-title">Поля Сражений</div>
           </div>
+        </div>
+        <div class="vac-body">
+          <div class="vac-desc">Нужен игрок с высоким MMR, который умеет объяснять позиционирование, составлять тир-листы героев и быстро адаптироваться к сезонным механикам.</div>
           <div class="vac-tags">
             <span class="tag tag-g">MMR 8 000+</span>
             <span class="tag tag-b">HSReplay Tier7</span>
-            <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Авторство</span>
+            <span class="tag tag-b">Архетипы</span>
+          </div>
+          <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
+            <span>Требования</span>
+            <span class="vac-toggle-arrow">▼</span>
+          </button>
+          <div class="vac-reqs">
+            <ul>
+              <li>Стабильный MMR от 8 000+ (подтверждает игру в сильных лобби)</li>
+              <li>Активная игра каждый сезон с учётом сброса рейтинга</li>
+              <li>Знание кривых прокачки таверны (стандартная, Рафаам, агрессивная и др.)</li>
+              <li>Знание всех архетипов: Звери, Мурлоки, Нежить, Демоны — и ключевых карт лейтгейма</li>
+              <li>Быстрая адаптация к сезонным механикам: квесты, аномалии, брелоки</li>
+              <li>Умение объяснять позиционирование и порядок предсмертных хрипов</li>
+              <li>Составление тир-листов героев с обоснованием, опираясь на сложность исполнения</li>
+              <li>Уверенная работа с HSReplay Tier7 / Firestone для анализа статистики</li>
+              <li>Публикация обзоров патчноутов в день выхода</li>
+            </ul>
           </div>
         </div>
-        <a href="https://forms.gle/Gekqqz3NqWudk9eR8" target="_blank" class="vac-btn">Откликнуться</a>
+        <div class="vac-foot">
+          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
+          <a href="https://forms.gle/Gekqqz3NqWudk9eR8" target="_blank" class="vac-btn">Откликнуться</a>
+        </div>
       </div>
 
       <!-- Стандарт -->
-      <div class="vac-card reveal" style="transition-delay:.12s">
-        <div class="vac-icon">🏆</div>
-        <div class="vac-body">
-          <div class="vac-title">Автор по Стандартному режиму</div>
-          <div class="vac-desc">
-            Ежемесячное взятие ранга Легенды, в идеале — топ-500/1000. Глубокое понимание win conditions всех актуальных колод, анализ матч-апов, написание детальных гайдов с правилами муллигана и подбором бюджетных замен. Опыт в турнирах — плюс.
-          </div>
-          <div class="vac-tags">
-            <span class="tag tag-g">Легенда ежемесячно</span>
-            <span class="tag tag-b">Гайды / Аналитика</span>
-            <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Авторство</span>
+      <div class="vac-card reveal" style="transition-delay:.14s">
+        <div class="vac-head">
+          <img class="vac-mode-icon" src="job_logo/standart.webp" alt="Стандарт">
+          <div class="vac-head-info">
+            <div class="vac-eyebrow">Автор · Контент</div>
+            <div class="vac-title">Стандартный режим</div>
           </div>
         </div>
-        <a href="https://forms.gle/VcQRajTUrSdYAycWA" target="_blank" class="vac-btn">Откликнуться</a>
+        <div class="vac-body">
+          <div class="vac-desc">Ищем Легенд-игрока, способного писать детальные гайды на колоды: муллиган, стратегии по стадиям игры и анализ матч-апов для всей аудитории — от новичка до профи.</div>
+          <div class="vac-tags">
+            <span class="tag tag-g">Легенда ежемесячно</span>
+            <span class="tag tag-b">Win conditions</span>
+            <span class="tag tag-b">Матч-апы</span>
+          </div>
+          <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
+            <span>Требования</span>
+            <span class="vac-toggle-arrow">▼</span>
+          </button>
+          <div class="vac-reqs">
+            <ul>
+              <li>Ежемесячное взятие ранга Легенды; идеально — топ-500/1000</li>
+              <li>Глубокое понимание win conditions всех актуальных колод</li>
+              <li>Анализ матч-апов и умение определять правильные tech cards</li>
+              <li>Написание детальных гайдов: муллиган, ранняя / мид / лейт стратегия</li>
+              <li>Подбор бюджетных замен легендарных карт для новичков</li>
+              <li>Опыт участия в турнирах или квалификациях — плюс</li>
+            </ul>
+          </div>
+        </div>
+        <div class="vac-foot">
+          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
+          <a href="https://forms.gle/VcQRajTUrSdYAycWA" target="_blank" class="vac-btn">Откликнуться</a>
+        </div>
       </div>
 
       <!-- Вольный -->
-      <div class="vac-card reveal" style="transition-delay:.18s">
-        <div class="vac-icon">📜</div>
-        <div class="vac-body">
-          <div class="vac-title">Автор по Вольному режиму</div>
-          <div class="vac-desc">
-            Ранг Легенды обязателен. Ценится статус «ветерана» с обширной коллекцией карт всех дополнений. Знание OTK-комбинаций, нишевых механик, умение предсказывать влияние новых релизов на баланс Вольного. Приветствуется знакомство с китайскими мета-отчётами.
-          </div>
-          <div class="vac-tags">
-            <span class="tag tag-g">Легенда / Ветеран</span>
-            <span class="tag tag-b">OTK / Механики</span>
-            <span class="tag tag-g">Удалённо</span>
-            <span class="tag tag-gr">Авторство</span>
+      <div class="vac-card reveal" style="transition-delay:.21s">
+        <div class="vac-head">
+          <img class="vac-mode-icon" src="job_logo/wild.webp" alt="Вольный">
+          <div class="vac-head-info">
+            <div class="vac-eyebrow">Автор · Контент</div>
+            <div class="vac-title">Вольный режим</div>
           </div>
         </div>
-        <a href="https://forms.gle/S4zbcxu5eZTSEFjR8" target="_blank" class="vac-btn">Откликнуться</a>
+        <div class="vac-body">
+          <div class="vac-desc">Ищем «ветерана» с обширной коллекцией карт всех дополнений, знающего OTK-комбинации и способного предугадывать, как свежие релизы ломают баланс Вольного.</div>
+          <div class="vac-tags">
+            <span class="tag tag-g">Легенда / Ветеран</span>
+            <span class="tag tag-b">OTK-механики</span>
+            <span class="tag tag-b">Вся коллекция</span>
+          </div>
+          <button class="vac-reqs-toggle" onclick="toggleReqs(this)">
+            <span>Требования</span>
+            <span class="vac-toggle-arrow">▼</span>
+          </button>
+          <div class="vac-reqs">
+            <ul>
+              <li>Ранг Легенды обязателен; ценится статус ветерана с полной коллекцией</li>
+              <li>Знание OTK-комбинаций и гипер-агро колод формата</li>
+              <li>Понимание нишевых взаимодействий старых карт с новыми</li>
+              <li>Написание гайдов: муллиган, стратегия по стадиям, анализ матч-апов</li>
+              <li>Подбор бюджетных замен для новичков</li>
+              <li>Приветствуется знание китайских мета-отчётов и Discord-сообществ Вольного</li>
+            </ul>
+          </div>
+        </div>
+        <div class="vac-foot">
+          <div class="vac-remote"><span class="vac-remote-dot"></span>Удалённо · Авторство</div>
+          <a href="https://forms.gle/S4zbcxu5eZTSEFjR8" target="_blank" class="vac-btn">Откликнуться</a>
+        </div>
       </div>
 
     </div>
@@ -1060,7 +1277,7 @@
     <!-- Общая форма -->
     <div class="vac-general reveal">
       <div class="vac-general-text">
-        Не нашли подходящей позиции? Мы рады единомышленникам, готовым работать на благо нашего сообщества!
+        Не нашли подходящей позиции? Мы рады всем единомышленникам, готовым работать на благо русскоязычного Hearthstone-сообщества!
       </div>
       <a href="https://forms.gle/Aet8Yhn1ucn5x5RB7" target="_blank" class="btn-partner">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
@@ -1233,6 +1450,16 @@ document.querySelectorAll('.proj-card').forEach(card=>{
   });
   card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
 });
+
+// Vacancies accordion
+function toggleReqs(btn) {
+  const reqs = btn.nextElementSibling;
+  const isOpen = reqs.classList.contains('open');
+  // закрыть все открытые в той же карточке
+  reqs.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.querySelector('span:last-child').textContent = isOpen ? 'Требования' : 'Свернуть';
+}
 </script>
 </body>
 </html>
