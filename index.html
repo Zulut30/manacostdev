@@ -751,6 +751,12 @@
         <div class="stat-num" data-target="7500">0</div>
         <div class="stat-label">подписчиков в Telegram</div>
       </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-icon" style="font-size:2rem;filter:drop-shadow(0 0 10px rgba(201,151,58,0.5))">🌐</div>
+        <div class="stat-num stat-num--plus" data-target="500000">0</div>
+        <div class="stat-label">посещений сайтов в месяц</div>
+      </div>
     </div>
   </div>
 
@@ -1017,14 +1023,16 @@ const counterObs = new IntersectionObserver(entries => {
     if (!entry.isIntersecting) return;
     const el = entry.target;
     const target = parseInt(el.dataset.target);
+    const isPlus = el.classList.contains('stat-num--plus');
     const duration = 1800;
     const start = performance.now();
     function step(now) {
       const p = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = formatNum(Math.round(ease * target));
+      const val = formatNum(Math.round(ease * target));
+      el.textContent = (isPlus && p >= 1 ? 'свыше ' : '') + val;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = formatNum(target);
+      else el.textContent = (isPlus ? 'свыше ' : '') + formatNum(target);
     }
     requestAnimationFrame(step);
     counterObs.unobserve(el);
