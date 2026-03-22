@@ -1455,10 +1455,9 @@ document.querySelectorAll('.proj-card').forEach(card=>{
 function toggleReqs(btn) {
   const reqs = btn.nextElementSibling;
   const isOpen = reqs.classList.contains('open');
-  // закрыть все открытые в той же карточке
   reqs.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
-  btn.querySelector('span:last-child').textContent = isOpen ? 'Требования' : 'Свернуть';
+  btn.querySelector('span:first-child').textContent = isOpen ? 'Требования' : 'Свернуть';
 }
 </script>
 </body>
