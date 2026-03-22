@@ -319,37 +319,40 @@
     }
 
     .card-top {
-      height: 130px;
-      display: flex; align-items: center; justify-content: center;
+      height: 180px;
       position: relative; overflow: hidden;
     }
 
-    .card-top-1 { background: linear-gradient(135deg, #091824 0%, #0f2d47 55%, #091824 100%); }
-    .card-top-2 { background: linear-gradient(135deg, #140b24 0%, #25144a 55%, #140b24 100%); }
-    .card-top-3 { background: linear-gradient(135deg, #181500 0%, #2e2a00 55%, #181500 100%); }
+    .card-top img.card-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+      transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .proj-card:hover .card-bg { transform: scale(1.07); }
+
+    /* dark vignette over art */
+    .card-top::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.0) 40%,
+        rgba(20,14,6,0.85) 100%);
+    }
 
     /* animated shimmer on banner */
     .card-top::after {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 50%, transparent 60%);
-      animation: shimmer 4s ease-in-out infinite;
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+      animation: shimmer 5s ease-in-out infinite;
     }
 
     @keyframes shimmer {
       0% { transform: translateX(-100%); }
-      60%, 100% { transform: translateX(200%); }
-    }
-
-    .card-icon {
-      font-size: 3.8rem;
-      position: relative; z-index: 1;
-      animation: icon-pulse 3.5s ease-in-out infinite;
-    }
-
-    @keyframes icon-pulse {
-      0%, 100% { filter: drop-shadow(0 0 8px currentColor); transform: scale(1); }
-      50% { filter: drop-shadow(0 0 22px currentColor); transform: scale(1.06); }
+      60%, 100% { transform: translateX(220%); }
     }
 
     .card-mana {
@@ -681,9 +684,9 @@
     <div class="cards-grid">
 
       <div class="proj-card reveal">
-        <div class="card-top card-top-1">
+        <div class="card-top">
+          <img class="card-bg" src="back/hs-manacost.png" alt="">
           <div class="card-mana">∞</div>
-          <span class="card-icon" style="color:#5ab4e0">🃏</span>
         </div>
         <div class="card-body">
           <div class="card-klass">База данных карт · Hearthstone</div>
@@ -701,9 +704,9 @@
       </div>
 
       <div class="proj-card reveal" style="transition-delay:.1s">
-        <div class="card-top card-top-2">
+        <div class="card-top">
+          <img class="card-bg" src="back/kolodahearthstone.png" alt="">
           <div class="card-mana">🔮</div>
-          <span class="card-icon" style="color:#b39ddb">📚</span>
         </div>
         <div class="card-body">
           <div class="card-klass">Коллекции колод · Все классы</div>
@@ -721,9 +724,9 @@
       </div>
 
       <div class="proj-card reveal" style="transition-delay:.2s">
-        <div class="card-top card-top-3">
+        <div class="card-top">
+          <img class="card-bg" src="back/hs-arena.png" alt="">
           <div class="card-mana">⚡</div>
-          <span class="card-icon" style="color:#fff176">🏟</span>
         </div>
         <div class="card-body">
           <div class="card-klass">Симулятор арены · Помощник</div>
@@ -773,7 +776,7 @@
             <span class="tag tag-gr">Fulltime / Part</span>
           </div>
         </div>
-        <a href="mailto:jobs@manacostdev.ru" class="vac-btn">Откликнуться</a>
+        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
       </div>
 
       <div class="vac-card reveal" style="transition-delay:.08s">
@@ -790,7 +793,7 @@
             <span class="tag tag-gr">Part-time</span>
           </div>
         </div>
-        <a href="mailto:jobs@manacostdev.ru" class="vac-btn">Откликнуться</a>
+        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
       </div>
 
       <div class="vac-card reveal" style="transition-delay:.16s">
@@ -806,7 +809,7 @@
             <span class="tag tag-g">Удалённо</span>
           </div>
         </div>
-        <a href="mailto:jobs@manacostdev.ru" class="vac-btn">Откликнуться</a>
+        <a href="mailto:admin@hs-manacost.ru" class="vac-btn">Откликнуться</a>
       </div>
 
     </div>
@@ -828,28 +831,28 @@
 
     <div class="contacts-grid">
 
-      <a href="mailto:info@manacostdev.ru" class="ct-card reveal">
+      <a href="mailto:admin@hs-manacost.ru" class="ct-card reveal">
         <img class="ct-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9973a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E" alt="Email">
         <div class="ct-label">Email</div>
-        <div class="ct-value">info@manacostdev.ru</div>
+        <div class="ct-value">admin@hs-manacost.ru</div>
       </a>
 
-      <a href="https://t.me/manacostdev" target="_blank" class="ct-card reveal" style="transition-delay:.08s">
+      <a href="https://t.me/manacost_ru" target="_blank" class="ct-card reveal" style="transition-delay:.08s">
         <img class="ct-img" src="telegram.png" alt="Telegram">
         <div class="ct-label">Telegram</div>
-        <div class="ct-value">@manacostdev</div>
+        <div class="ct-value">@manacost_ru</div>
       </a>
 
-      <a href="https://vk.com/manacostdev" target="_blank" class="ct-card reveal" style="transition-delay:.16s">
+      <a href="https://vk.com/manacost" target="_blank" class="ct-card reveal" style="transition-delay:.16s">
         <img class="ct-img" src="vk.svg" alt="ВКонтакте">
         <div class="ct-label">ВКонтакте</div>
-        <div class="ct-value">vk.com/manacostdev</div>
+        <div class="ct-value">vk.com/manacost</div>
       </a>
 
-      <a href="https://boosty.to/manacostdev" target="_blank" class="ct-card reveal" style="transition-delay:.24s">
+      <a href="https://boosty.to/kolodahearthstone" target="_blank" class="ct-card reveal" style="transition-delay:.24s">
         <img class="ct-img" src="boosty.png" alt="Boosty">
         <div class="ct-label">Boosty</div>
-        <div class="ct-value">boosty.to/manacostdev</div>
+        <div class="ct-value">boosty.to/kolodahearthstone</div>
       </a>
 
     </div>
