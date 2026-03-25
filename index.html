@@ -1333,6 +1333,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Preload critical font -->
   <link rel="preload" href="assets/fonts/2318-font.otf" as="font" type="font/otf" crossorigin>
+  <!-- Preload critical project images -->
+  <link rel="preload" href="assets/images/projects/hs-manacost.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/images/projects/kolodahearthstone.png" as="image">
+  <link rel="preload" href="assets/images/projects/hs-arena.png" as="image">
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -1437,7 +1441,7 @@
 
       <div class="proj-card reveal">
         <div class="card-top">
-          <img class="card-bg" src="assets/images/projects/hs-manacost.png" alt="" loading="lazy">
+          <img class="card-bg" src="assets/images/projects/hs-manacost.png" alt="" loading="eager" fetchpriority="high">
         </div>
         <div class="card-body">
           <div class="card-klass" data-i18n="proj1.klass">СМИ · Гайды · Колоды</div>
@@ -1452,7 +1456,7 @@
 
       <div class="proj-card reveal" style="transition-delay:.1s">
         <div class="card-top">
-          <img class="card-bg" src="assets/images/projects/kolodahearthstone.png" alt="" loading="lazy">
+          <img class="card-bg" src="assets/images/projects/kolodahearthstone.png" alt="" loading="eager">
         </div>
         <div class="card-body">
           <div class="card-klass" data-i18n="proj2.klass">Подписка · Авторские гайды · Мета</div>
@@ -1467,7 +1471,7 @@
 
       <div class="proj-card reveal" style="transition-delay:.2s">
         <div class="card-top">
-          <img class="card-bg" src="assets/images/projects/hs-arena.png" alt="" loading="lazy">
+          <img class="card-bg" src="assets/images/projects/hs-arena.png" alt="" loading="eager">
         </div>
         <div class="card-body">
           <div class="card-klass" data-i18n="proj3.klass">Арена · Статистика</div>
@@ -1527,6 +1531,91 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
         <span data-i18n="btn.adContact">Написать по рекламе</span>
       </a>
+    </div>
+  </section>
+
+  <div class="ornament">
+    <div class="orn-line"></div>
+    <div class="orn-gem"></div>
+    <div class="orn-line"></div>
+  </div>
+
+  <!-- ===== CONTACTS ===== -->
+  <section id="contacts">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow" data-i18n="contacts.eyebrow">Связь с командой</div>
+      <div class="sec-title" data-i18n="contacts.title">Контакты</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <div class="contacts-grid">
+
+      <a href="mailto:admin@hs-manacost.ru" class="ct-card reveal">
+        <div class="ct-icon-wrap">
+          <svg class="ct-img" viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.email">Email</div>
+          <div class="ct-value">admin@hs-manacost.ru</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
+      <a href="https://t.me/manacost_ru" target="_blank" class="ct-card reveal" style="transition-delay:.05s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="assets/images/social/telegram.png" alt="Telegram" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.tgChannel">Telegram-канал</div>
+          <div class="ct-value">@manacost_ru</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
+      <a href="https://vk.com/manacost" target="_blank" class="ct-card reveal" style="transition-delay:.10s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="assets/images/social/vk.svg" alt="ВКонтакте" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.vk">ВКонтакте</div>
+          <div class="ct-value">vk.com/manacost</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
+      <a href="https://boosty.to/kolodahearthstone" target="_blank" class="ct-card reveal" style="transition-delay:.15s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="assets/images/social/boosty.png" alt="Boosty" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.boosty">Boosty</div>
+          <div class="ct-value">kolodahearthstone</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
+      <a href="https://t.me/manacostHS" target="_blank" class="ct-card reveal" style="transition-delay:.20s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="assets/images/social/telegram.png" alt="Техподдержка" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.support">Техподдержка</div>
+          <div class="ct-value">@manacostHS</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
+      <a href="https://t.me/LordZulut" target="_blank" class="ct-card reveal" style="transition-delay:.25s">
+        <div class="ct-icon-wrap">
+          <img class="ct-img" src="assets/images/social/telegram.png" alt="Реклама" loading="lazy">
+        </div>
+        <div class="ct-info">
+          <div class="ct-label" data-i18n="ct.ads">Реклама</div>
+          <div class="ct-value">@LordZulut</div>
+        </div>
+        <span class="ct-arrow">›</span>
+      </a>
+
     </div>
   </section>
 
@@ -1782,91 +1871,6 @@
           <span data-i18n="btn.adContact">Написать по рекламе</span>
         </a>
       </div>
-
-    </div>
-  </section>
-
-  <div class="ornament">
-    <div class="orn-line"></div>
-    <div class="orn-gem"></div>
-    <div class="orn-line"></div>
-  </div>
-
-  <!-- ===== CONTACTS ===== -->
-  <section id="contacts">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow" data-i18n="contacts.eyebrow">Связь с командой</div>
-      <div class="sec-title" data-i18n="contacts.title">Контакты</div>
-      <div class="sec-rule"></div>
-    </div>
-
-    <div class="contacts-grid">
-
-      <a href="mailto:admin@hs-manacost.ru" class="ct-card reveal">
-        <div class="ct-icon-wrap">
-          <svg class="ct-img" viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.email">Email</div>
-          <div class="ct-value">admin@hs-manacost.ru</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
-
-      <a href="https://t.me/manacost_ru" target="_blank" class="ct-card reveal" style="transition-delay:.05s">
-        <div class="ct-icon-wrap">
-          <img class="ct-img" src="assets/images/social/telegram.png" alt="Telegram" loading="lazy">
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.tgChannel">Telegram-канал</div>
-          <div class="ct-value">@manacost_ru</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
-
-      <a href="https://vk.com/manacost" target="_blank" class="ct-card reveal" style="transition-delay:.10s">
-        <div class="ct-icon-wrap">
-          <img class="ct-img" src="assets/images/social/vk.svg" alt="ВКонтакте" loading="lazy">
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.vk">ВКонтакте</div>
-          <div class="ct-value">vk.com/manacost</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
-
-      <a href="https://boosty.to/kolodahearthstone" target="_blank" class="ct-card reveal" style="transition-delay:.15s">
-        <div class="ct-icon-wrap">
-          <img class="ct-img" src="assets/images/social/boosty.png" alt="Boosty" loading="lazy">
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.boosty">Boosty</div>
-          <div class="ct-value">kolodahearthstone</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
-
-      <a href="https://t.me/manacostHS" target="_blank" class="ct-card reveal" style="transition-delay:.20s">
-        <div class="ct-icon-wrap">
-          <img class="ct-img" src="assets/images/social/telegram.png" alt="Техподдержка" loading="lazy">
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.support">Техподдержка</div>
-          <div class="ct-value">@manacostHS</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
-
-      <a href="https://t.me/LordZulut" target="_blank" class="ct-card reveal" style="transition-delay:.25s">
-        <div class="ct-icon-wrap">
-          <img class="ct-img" src="assets/images/social/telegram.png" alt="Реклама" loading="lazy">
-        </div>
-        <div class="ct-info">
-          <div class="ct-label" data-i18n="ct.ads">Реклама</div>
-          <div class="ct-value">@LordZulut</div>
-        </div>
-        <span class="ct-arrow">›</span>
-      </a>
 
     </div>
   </section>
