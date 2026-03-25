@@ -1305,11 +1305,11 @@
       height: 22px;
       border-radius: 4px;
       overflow: hidden;
-      border: 1.5px solid transparent;
+      border: none;
       cursor: pointer;
       background: none;
       padding: 0;
-      transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
       opacity: 0.45;
     }
 
@@ -1321,7 +1321,7 @@
     }
 
     .lang-btn:hover { opacity: 0.85; transform: scale(1.1); }
-    .lang-btn.active { border-color: var(--gold); opacity: 1; }
+    .lang-btn.active { opacity: 1; }
 
     @media (max-width: 500px) {
       .lang-switcher { margin-right: 6px; }
@@ -1355,9 +1355,9 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#projects" onclick="closeNav()" data-i18n="nav.projects">Проекты</a></li>
       <li><a href="#partners" onclick="closeNav()" data-i18n="nav.partners">Партнёры</a></li>
+      <li><a href="#contacts" onclick="closeNav()" data-i18n="nav.contacts">Контакты</a></li>
       <li><a href="#vacancies" onclick="closeNav()" data-i18n="nav.vacancies">Вакансии</a></li>
       <li><a href="#services" onclick="closeNav()" data-i18n="nav.services">Услуги</a></li>
-      <li><a href="#contacts" onclick="closeNav()" data-i18n="nav.contacts">Контакты</a></li>
     </ul>
     <div class="lang-switcher">
       <button class="lang-btn active" data-lang="ru" onclick="setLang('ru')" title="Русский">
